@@ -1,0 +1,346 @@
+/* Box Model Styling CSS - Integrated from index.html */
+/* This file demonstrates comprehensive box model practices with original design */
+
+/* ===========================
+   Universal Box Model Reset
+   =========================== */
+*,
+*::before,
+*::after {
+    box-sizing: border-box; /* Include padding and border in element's total width/height */
+}
+
+/* ===========================
+   CSS Variables (Merged from original design)
+   =========================== */
+:root {
+    /* Original design variables */
+    --background-color: #c0d8b9;
+    --text-color: #333333;
+    --header-color: #1a1a1a;
+    --accent-color: #000000;
+    --border-color: #000000;
+    --font-main: 'Space Grotesk', sans-serif;
+    --font-size-small: 0.8rem;
+    --font-size-normal: 1rem;
+    --font-size-medium: 1.2rem;
+    --font-size-large: 1.8rem;
+    --spacing-unit: 20px;
+    
+    /* Additional box model variables */
+    --border-width-thin: 1px;
+    --border-width-medium: 2px;
+    --border-width-thick: 4px;
+    --border-radius-sm: 4px;
+    --border-radius-md: 8px;
+    --border-radius-lg: 12px;
+    --color-shadow: rgba(0, 0, 0, 0.1);
+}
+
+/* ===========================
+   Base Elements
+   =========================== */
+body {
+    font-family: var(--font-main);
+    margin: 0;
+    padding: 0;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    font-size: var(--font-size-normal);
+    display: flex;
+    justify-content: center;
+    padding-top: calc(var(--spacing-unit) * 2);
+    padding-bottom: calc(var(--spacing-unit) * 2);
+}
+
+/* ===========================
+   Container Layout
+   =========================== */
+.container {
+    width: 90%;
+    max-width: 1000px;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: calc(var(--spacing-unit) * 2);
+}
+
+/* ===========================
+   Section Elements
+   =========================== */
+header, section, footer {
+    padding: var(--spacing-unit);
+    border: 1px solid var(--border-color);
+    background-color: var(--background-color);
+}
+
+/* ===========================
+   Headers with Box Model
+   =========================== */
+h1, h2, h3 {
+    font-family: var(--font-main);
+    color: var(--header-color);
+    margin-top: 0;
+    font-weight: 500; /* Adjusted for Space Grotesk */
+}
+
+h1 {
+    font-size: var(--font-size-large);
+    text-align: center;
+    margin-bottom: var(--spacing-unit);
+    border-bottom: 2px solid var(--accent-color);
+    padding-bottom: var(--spacing-unit);
+}
+
+h2 {
+    font-size: var(--font-size-medium);
+    color: var(--accent-color);
+    margin-bottom: calc(var(--spacing-unit) / 2);
+    border-bottom: 1px solid var(--e0e0e0);
+    padding-bottom: calc(var(--spacing-unit) / 4);
+}
+
+h3 {
+    font-size: var(--font-size-normal);
+    font-weight: bold;
+    margin-bottom: calc(var(--spacing-unit) / 4);
+}
+
+/* ===========================
+   Content Elements
+   =========================== */
+p, li {
+    font-size: var(--font-size-small);
+    margin-bottom: calc(var(--spacing-unit) / 2);
+}
+
+/* Header subtitle styling */
+.header-subtitle {
+    text-align: center;
+    font-size: var(--font-size-small);
+    margin-top: -15px;
+    color: #777;
+}
+
+/* ===========================
+   List Styling with Box Model
+   =========================== */
+ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+li {
+    margin-bottom: calc(var(--spacing-unit) / 4);
+    padding-left: var(--spacing-unit);
+    position: relative;
+}
+
+li::before {
+    content: "▹";
+    position: absolute;
+    left: 0;
+    color: var(--accent-color);
+}
+
+/* ===========================
+   Links
+   =========================== */
+a {
+    color: var(--accent-color);
+    text-decoration: none;
+    font-weight: bold;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* ===========================
+   Bio Section with Box Model
+   =========================== */
+.bio {
+    font-size: var(--font-size-small);
+    font-style: italic;
+    text-align: justify;
+    padding: var(--spacing-unit);
+    border-left: 3px solid var(--accent-color);
+    background-color: var(--background-color);
+}
+
+/* ===========================
+   Carousel Styles with Box Model
+   =========================== */
+.carousel-container {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    border: 1px solid var(--border-color);
+    margin-bottom: var(--spacing-unit);
+}
+
+.carousel-slide {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+.carousel-item {
+    min-width: 100%;
+    box-sizing: border-box;
+}
+
+.carousel-item img {
+    width: 100%;
+    height: auto;
+    max-height: 500px;
+    object-fit: contain;
+    display: block;
+    background-color: #f0f0f0;
+}
+
+.carousel-item video {
+    width: 100%;
+    height: auto;
+    max-height: 500px;
+    object-fit: contain;
+    display: block;
+    background-color: #f0f0f0;
+}
+
+/* ===========================
+   Navigation Elements
+   =========================== */
+.carousel-nav {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    transform: translateY(-50%);
+}
+
+.carousel-nav button {
+    background-color: rgba(0, 0, 0, 0.3);
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    font-size: var(--font-size-medium);
+    font-family: var(--font-main);
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
+}
+
+.carousel-nav button:hover {
+    opacity: 1;
+}
+
+.carousel-nav .prev {
+    margin-left: 5px;
+}
+
+.carousel-nav .next {
+    margin-right: 5px;
+}
+
+/* ===========================
+   Grid Layout with Box Model
+   =========================== */
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--spacing-unit);
+}
+
+.info-grid > div {
+    border: 1px solid var(--border-color);
+    padding: var(--spacing-unit);
+    background-color: var(--background-color);
+}
+
+/* ===========================
+   Footer Styling
+   =========================== */
+footer {
+    text-align: center;
+    font-size: var(--font-size-small);
+    padding: var(--spacing-unit);
+    border-top: 2px solid var(--accent-color);
+}
+
+/* ===========================
+   Responsive Box Model Adjustments
+   =========================== */
+@media (max-width: 768px) {
+    body {
+        font-size: calc(var(--font-size-normal) * 0.9);
+        padding-top: var(--spacing-unit);
+        padding-bottom: var(--spacing-unit);
+    }
+    
+    .container {
+        width: 95%;
+        gap: var(--spacing-unit);
+    }
+    
+    h1 {
+        font-size: calc(var(--font-size-large) * 0.85);
+    }
+    
+    h2 {
+        font-size: calc(var(--font-size-medium) * 0.9);
+    }
+    
+    .carousel-item img {
+        max-height: 350px;
+    }
+    
+    .carousel-nav button {
+        padding: 8px 12px;
+        font-size: calc(var(--font-size-medium) * 0.9);
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        font-size: calc(var(--font-size-normal) * 0.8);
+    }
+    
+    h1 {
+        font-size: calc(var(--font-size-large) * 0.7);
+    }
+    
+    h2 {
+        font-size: calc(var(--font-size-medium) * 0.8);
+    }
+    
+    p, li, .bio {
+        font-size: calc(var(--font-size-small) * 0.95);
+    }
+    
+    .carousel-item img {
+        max-height: 250px;
+    }
+    
+    .carousel-nav button {
+        padding: 6px 10px;
+        font-size: calc(var(--font-size-medium) * 0.8);
+    }
+    
+    .info-grid {
+        grid-template-columns: 1fr; /* Stack on small screens */
+    }
+}
+
+/* ===========================
+   Debug Mode (uncomment to visualize box model)
+   =========================== */
+/*
+* {
+    outline: 1px solid red !important;
+}
+
+*:hover {
+    outline: 2px solid blue !important;
+}
+*/ 
