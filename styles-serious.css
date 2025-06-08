@@ -1,0 +1,786 @@
+/* SERIOUS/PROFESSIONAL Box Model Styling CSS - No Flexbox/Grid Version */
+/* This file demonstrates sophisticated corporate aesthetics with refined interactive elements */
+
+/* ===========================
+   Universal Box Model Reset
+   =========================== */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+/* ===========================
+   SERIOUS CSS Variables - PROFESSIONAL PALETTE
+   =========================== */
+:root {
+    /* Professional color palette */
+    --background-color: #fafafa;
+    --text-color: #2c3e50;
+    --header-color: #1a252f;
+    --accent-color: #3498db;
+    --secondary-color: #34495e;
+    --tertiary-color: #7f8c8d;
+    --border-color: #bdc3c7;
+    --hover-color: #ecf0f1;
+    --shadow-color: rgba(44, 62, 80, 0.15);
+    --success-color: #27ae60;
+    --warning-color: #f39c12;
+    --error-color: #e74c3c;
+    --muted-color: #95a5a6;
+    
+    /* Professional typography */
+    --font-main: 'Times New Roman', 'Georgia', serif;
+    --font-secondary: 'Helvetica Neue', 'Arial', sans-serif;
+    --font-monospace: 'Courier New', monospace;
+    --font-size-tiny: 0.75rem;
+    --font-size-small: 0.875rem;
+    --font-size-normal: 1rem;
+    --font-size-medium: 1.125rem;
+    --font-size-large: 1.5rem;
+    --font-size-huge: 2.25rem;
+    --font-size-massive: 3rem;
+    
+    /* Professional spacing - consistent rhythm */
+    --spacing-xs: 4px;
+    --spacing-sm: 8px;
+    --spacing-md: 16px;
+    --spacing-lg: 24px;
+    --spacing-xl: 32px;
+    --spacing-xxl: 48px;
+    
+    /* Professional borders and radius - minimal curves */
+    --border-width-thin: 1px;
+    --border-width-medium: 2px;
+    --border-width-thick: 3px;
+    --border-radius-none: 0px;
+    --border-radius-minimal: 2px;
+    --border-radius-small: 4px;
+    --border-radius-medium: 6px;
+}
+
+/* ===========================
+   SERIOUS Base Elements - CORPORATE FOUNDATION
+   =========================== */
+body {
+    font-family: var(--font-main);
+    margin: 0;
+    padding: var(--spacing-lg);
+    background: linear-gradient(180deg, var(--background-color) 0%, #f8f9fa 100%);
+    color: var(--text-color);
+    line-height: 1.6;
+    font-size: var(--font-size-normal);
+    text-align: left;
+    transition: all 0.2s ease;
+}
+
+body:hover {
+    background: linear-gradient(180deg, #f8f9fa 0%, var(--background-color) 100%);
+}
+
+/* ===========================
+   SERIOUS Container - EXECUTIVE LAYOUT
+   =========================== */
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: var(--spacing-xxl);
+    background-color: #ffffff;
+    border: var(--border-width-thin) solid var(--border-color);
+    border-radius: var(--border-radius-minimal);
+    box-shadow: 
+        0 2px 8px var(--shadow-color),
+        0 8px 32px rgba(44, 62, 80, 0.08);
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--accent-color), var(--secondary-color));
+    border-radius: var(--border-radius-minimal) var(--border-radius-minimal) 0 0;
+}
+
+.container::after {
+    content: '';
+    position: absolute;
+    top: var(--spacing-sm);
+    right: var(--spacing-sm);
+    width: 8px;
+    height: 8px;
+    background-color: var(--success-color);
+    border-radius: 50%;
+    opacity: 0.8;
+}
+
+.container:hover {
+    box-shadow: 
+        0 4px 16px var(--shadow-color),
+        0 16px 64px rgba(44, 62, 80, 0.12);
+    transform: translateY(-2px);
+}
+
+.container:hover::after {
+    background-color: var(--accent-color);
+    opacity: 1;
+}
+
+/* ===========================
+   SERIOUS Section Elements - MODULE STRUCTURE
+   =========================== */
+header, section, footer {
+    margin-bottom: var(--spacing-xl);
+    padding: var(--spacing-lg);
+    background-color: rgba(255, 255, 255, 0.8);
+    border: var(--border-width-thin) solid var(--border-color);
+    border-left: var(--border-width-thick) solid var(--accent-color);
+    border-radius: var(--border-radius-minimal);
+    position: relative;
+    transition: all 0.2s ease;
+}
+
+header:hover, section:hover, footer:hover {
+    border-left-color: var(--secondary-color);
+    background-color: var(--hover-color);
+    transform: translateX(2px);
+    box-shadow: 0 2px 12px rgba(44, 62, 80, 0.1);
+}
+
+/* Professional decorative elements */
+header::before, section::before {
+    content: '';
+    position: absolute;
+    top: var(--spacing-sm);
+    right: var(--spacing-sm);
+    width: 6px;
+    height: 6px;
+    background-color: var(--tertiary-color);
+    border-radius: 50%;
+    transition: all 0.2s ease;
+}
+
+header:hover::before, section:hover::before {
+    background-color: var(--accent-color);
+    transform: scale(1.3);
+}
+
+/* ===========================
+   SERIOUS Headers - EXECUTIVE TYPOGRAPHY
+   =========================== */
+h1, h2, h3 {
+    font-family: var(--font-secondary);
+    color: var(--header-color);
+    margin-top: 0;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    letter-spacing: -0.025em;
+}
+
+h1 {
+    font-size: var(--font-size-massive);
+    text-align: center;
+    margin-bottom: var(--spacing-xl);
+    padding: var(--spacing-xl) var(--spacing-lg);
+    color: var(--header-color);
+    position: relative;
+    border-bottom: var(--border-width-medium) solid var(--border-color);
+    text-transform: none;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+}
+
+h1::before {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 2px;
+    background-color: var(--accent-color);
+    transition: width 0.3s ease;
+}
+
+h1:hover::before {
+    width: 120px;
+}
+
+h1:hover {
+    color: var(--accent-color);
+}
+
+h2 {
+    font-size: var(--font-size-large);
+    color: var(--secondary-color);
+    margin-bottom: var(--spacing-md);
+    padding: var(--spacing-sm) var(--spacing-md);
+    background-color: rgba(52, 73, 94, 0.05);
+    border-left: var(--border-width-thick) solid var(--accent-color);
+    border-radius: var(--border-radius-minimal);
+    display: inline-block;
+    position: relative;
+    transition: all 0.2s ease;
+    min-width: 200px;
+}
+
+h2:hover {
+    background-color: rgba(52, 152, 219, 0.08);
+    transform: translateX(4px);
+    cursor: default;
+    color: var(--accent-color);
+}
+
+h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--accent-color);
+    transition: width 0.3s ease;
+}
+
+h2:hover::after {
+    width: 100%;
+}
+
+h3 {
+    font-size: var(--font-size-medium);
+    color: var(--tertiary-color);
+    margin-bottom: var(--spacing-sm);
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border-bottom: var(--border-width-thin) solid var(--border-color);
+    display: inline-block;
+    transition: all 0.2s ease;
+    font-weight: 500;
+}
+
+h3:hover {
+    color: var(--secondary-color);
+    border-bottom-color: var(--secondary-color);
+    transform: translateY(-1px);
+}
+
+/* ===========================
+   SERIOUS Content Elements - PROFESSIONAL TEXT
+   =========================== */
+p, li {
+    font-size: var(--font-size-normal);
+    margin-bottom: var(--spacing-md);
+    transition: all 0.2s ease;
+    line-height: 1.7;
+}
+
+p:hover {
+    color: var(--secondary-color);
+    padding-left: var(--spacing-xs);
+    border-left: var(--border-width-medium) solid var(--accent-color);
+}
+
+/* Header subtitle styling */
+.header-subtitle {
+    text-align: center;
+    font-size: var(--font-size-small);
+    margin-top: -16px;
+    color: var(--tertiary-color);
+    font-style: italic;
+    font-family: var(--font-main);
+    transition: all 0.2s ease;
+}
+
+.header-subtitle:hover {
+    color: var(--secondary-color);
+}
+
+/* ===========================
+   SERIOUS List Styling - STRUCTURED CONTENT
+   =========================== */
+ul {
+    list-style: none;
+    padding-left: 0;
+    counter-reset: list-counter;
+}
+
+li {
+    margin-bottom: var(--spacing-md);
+    padding: var(--spacing-md) var(--spacing-lg);
+    position: relative;
+    background-color: rgba(236, 240, 241, 0.5);
+    border-radius: var(--border-radius-minimal);
+    border-left: var(--border-width-medium) solid var(--border-color);
+    transition: all 0.2s ease;
+    padding-left: var(--spacing-xxl);
+    counter-increment: list-counter;
+}
+
+li:hover {
+    background-color: var(--hover-color);
+    transform: translateX(4px);
+    border-left-color: var(--accent-color);
+    box-shadow: 0 2px 8px rgba(44, 62, 80, 0.08);
+}
+
+li::before {
+    content: counter(list-counter, decimal-leading-zero);
+    position: absolute;
+    left: var(--spacing-md);
+    top: var(--spacing-md);
+    font-family: var(--font-monospace);
+    font-size: var(--font-size-small);
+    color: var(--tertiary-color);
+    font-weight: bold;
+    transition: all 0.2s ease;
+    background-color: rgba(52, 73, 94, 0.1);
+    padding: var(--spacing-xs);
+    border-radius: var(--border-radius-small);
+    min-width: 24px;
+    text-align: center;
+}
+
+li:hover::before {
+    color: var(--accent-color);
+    background-color: rgba(52, 152, 219, 0.1);
+    transform: scale(1.1);
+}
+
+li::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: var(--spacing-md);
+    transform: translateY(-50%);
+    width: 4px;
+    height: 4px;
+    background-color: var(--border-color);
+    border-radius: 50%;
+    transition: all 0.2s ease;
+}
+
+li:hover::after {
+    background-color: var(--accent-color);
+    transform: translateY(-50%) scale(1.5);
+}
+
+/* ===========================
+   SERIOUS Links - PROFESSIONAL HYPERLINKS
+   =========================== */
+a {
+    color: var(--accent-color);
+    text-decoration: none;
+    font-weight: 500;
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border-radius: var(--border-radius-minimal);
+    transition: all 0.2s ease;
+    position: relative;
+    border-bottom: var(--border-width-thin) solid transparent;
+}
+
+a:hover {
+    background-color: rgba(52, 152, 219, 0.08);
+    color: var(--secondary-color);
+    border-bottom-color: var(--accent-color);
+    transform: translateY(-1px);
+}
+
+a:active {
+    transform: translateY(0);
+    background-color: rgba(52, 152, 219, 0.15);
+}
+
+a:focus {
+    outline: var(--border-width-medium) solid var(--accent-color);
+    outline-offset: 2px;
+}
+
+/* ===========================
+   SERIOUS Bio Section - EXECUTIVE SUMMARY
+   =========================== */
+.bio {
+    font-size: var(--font-size-normal);
+    font-style: normal;
+    text-align: justify;
+    padding: var(--spacing-xl);
+    margin: var(--spacing-xl) 0;
+    background: linear-gradient(135deg, rgba(236, 240, 241, 0.3), rgba(189, 195, 199, 0.1));
+    border: var(--border-width-thin) solid var(--border-color);
+    border-radius: var(--border-radius-medium);
+    position: relative;
+    transition: all 0.3s ease;
+    line-height: 1.8;
+}
+
+.bio:hover {
+    background: linear-gradient(135deg, rgba(236, 240, 241, 0.5), rgba(189, 195, 199, 0.2));
+    border-color: var(--accent-color);
+    box-shadow: 0 4px 16px rgba(44, 62, 80, 0.1);
+}
+
+.bio::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: linear-gradient(180deg, var(--accent-color), var(--secondary-color));
+    border-radius: var(--border-radius-medium) 0 0 var(--border-radius-medium);
+}
+
+.bio::after {
+    content: '"';
+    position: absolute;
+    top: var(--spacing-md);
+    right: var(--spacing-md);
+    font-size: var(--font-size-huge);
+    color: var(--border-color);
+    font-family: Georgia, serif;
+    opacity: 0.3;
+}
+
+/* ===========================
+   SERIOUS Carousel - MEDIA PRESENTATION
+   =========================== */
+.carousel-container {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    border: var(--border-width-thin) solid var(--border-color);
+    border-radius: var(--border-radius-medium);
+    margin-bottom: var(--spacing-xl);
+    box-shadow: 0 4px 16px rgba(44, 62, 80, 0.1);
+    transition: all 0.3s ease;
+    background-color: #ffffff;
+}
+
+.carousel-container:hover {
+    border-color: var(--accent-color);
+    box-shadow: 0 8px 24px rgba(44, 62, 80, 0.15);
+}
+
+.carousel-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent-color), var(--secondary-color));
+    z-index: 10;
+}
+
+.carousel-slide {
+    width: 100%;
+    transition: transform 0.4s ease-in-out;
+}
+
+.carousel-item {
+    width: 100%;
+    display: block;
+}
+
+.carousel-item img,
+.carousel-item video {
+    width: 100%;
+    height: auto;
+    max-height: 400px;
+    object-fit: cover;
+    display: block;
+    background-color: #f8f9fa;
+    transition: all 0.3s ease;
+}
+
+.carousel-item img:hover,
+.carousel-item video:hover {
+    filter: brightness(1.05) contrast(1.05);
+}
+
+/* ===========================
+   SERIOUS Navigation Elements - CONTROL INTERFACE
+   =========================== */
+.carousel-nav {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    transform: translateY(-50%);
+    pointer-events: none;
+}
+
+.carousel-nav button {
+    background: rgba(255, 255, 255, 0.95);
+    color: var(--secondary-color);
+    border: var(--border-width-thin) solid var(--border-color);
+    padding: var(--spacing-sm);
+    cursor: pointer;
+    font-size: var(--font-size-medium);
+    font-family: var(--font-secondary);
+    border-radius: var(--border-radius-small);
+    width: 40px;
+    height: 40px;
+    font-weight: 600;
+    transition: all 0.2s ease;
+    pointer-events: auto;
+    box-shadow: 0 2px 8px rgba(44, 62, 80, 0.1);
+}
+
+.carousel-nav button:hover {
+    background-color: var(--accent-color);
+    color: #ffffff;
+    border-color: var(--accent-color);
+    transform: scale(1.1);
+    box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3);
+}
+
+.carousel-nav button:active {
+    transform: scale(0.95);
+}
+
+.carousel-nav .prev {
+    position: absolute;
+    left: var(--spacing-md);
+}
+
+.carousel-nav .prev::before {
+    content: '‹';
+}
+
+.carousel-nav .next {
+    position: absolute;
+    right: var(--spacing-md);
+}
+
+.carousel-nav .next::before {
+    content: '›';
+}
+
+/* ===========================
+   SERIOUS Info Layout - STRUCTURED GRID
+   =========================== */
+.info-grid {
+    width: 100%;
+    margin-bottom: var(--spacing-xl);
+}
+
+.info-grid > div {
+    width: 48%;
+    margin: 1%;
+    display: inline-block;
+    vertical-align: top;
+    border: var(--border-width-thin) solid var(--border-color);
+    padding: var(--spacing-lg);
+    background: #ffffff;
+    border-radius: var(--border-radius-medium);
+    transition: all 0.2s ease;
+    position: relative;
+    box-shadow: 0 2px 8px rgba(44, 62, 80, 0.05);
+}
+
+.info-grid > div:hover {
+    transform: translateY(-2px);
+    border-color: var(--accent-color);
+    box-shadow: 0 8px 24px rgba(44, 62, 80, 0.12);
+}
+
+.info-grid > div::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent-color), var(--secondary-color));
+    border-radius: var(--border-radius-medium) var(--border-radius-medium) 0 0;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+.info-grid > div:hover::before {
+    opacity: 1;
+}
+
+/* ===========================
+   SERIOUS Footer - CORPORATE CONCLUSION
+   =========================== */
+footer {
+    text-align: center;
+    font-size: var(--font-size-small);
+    padding: var(--spacing-xl);
+    background: linear-gradient(135deg, #ffffff 0%, var(--hover-color) 100%);
+    color: var(--secondary-color);
+    border: var(--border-width-thin) solid var(--border-color);
+    border-radius: var(--border-radius-medium);
+    margin-top: var(--spacing-xxl);
+    position: relative;
+    transition: all 0.3s ease;
+    border-left: var(--border-width-thick) solid var(--accent-color);
+}
+
+footer:hover {
+    background: linear-gradient(135deg, var(--hover-color) 0%, #ffffff 100%);
+    border-color: var(--accent-color);
+    box-shadow: 0 4px 16px rgba(44, 62, 80, 0.1);
+}
+
+footer::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent-color), var(--secondary-color));
+    border-radius: 0 0 var(--border-radius-medium) var(--border-radius-medium);
+}
+
+/* ===========================
+   SERIOUS Responsive Design - ADAPTIVE PROFESSIONALISM
+   =========================== */
+@media (max-width: 768px) {
+    body {
+        padding: var(--spacing-md);
+        font-size: var(--font-size-small);
+    }
+    
+    .container {
+        width: 95%;
+        padding: var(--spacing-lg);
+    }
+    
+    h1 {
+        font-size: var(--font-size-huge);
+        padding: var(--spacing-lg);
+    }
+    
+    h2 {
+        font-size: var(--font-size-medium);
+        min-width: auto;
+    }
+    
+    .carousel-item img {
+        max-height: 250px;
+    }
+    
+    .carousel-nav button {
+        width: 36px;
+        height: 36px;
+        font-size: var(--font-size-normal);
+    }
+    
+    .info-grid > div {
+        width: 98%;
+        margin: 1%;
+        display: block;
+        margin-bottom: var(--spacing-md);
+    }
+    
+    li {
+        padding-left: var(--spacing-xl);
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: var(--font-size-large);
+        letter-spacing: -0.01em;
+    }
+    
+    h2 {
+        font-size: var(--font-size-normal);
+    }
+    
+    .carousel-item img {
+        max-height: 200px;
+    }
+    
+    .carousel-nav button {
+        width: 32px;
+        height: 32px;
+        font-size: var(--font-size-small);
+    }
+    
+    .bio {
+        padding: var(--spacing-lg);
+        text-align: left;
+    }
+}
+
+/* ===========================
+   SERIOUS Interactive Elements - REFINED INTERACTIONS
+   =========================== */
+*:focus {
+    outline: var(--border-width-medium) solid var(--accent-color);
+    outline-offset: 2px;
+    border-radius: var(--border-radius-minimal);
+}
+
+/* Selection styling */
+::selection {
+    background-color: var(--accent-color);
+    color: #ffffff;
+}
+
+/* Scroll animation */
+@media (prefers-reduced-motion: no-preference) {
+    * {
+        scroll-behavior: smooth;
+    }
+}
+
+/* ===========================
+   SERIOUS Professional Effects
+   =========================== */
+.container:active {
+    transform: translateY(0px);
+    transition: transform 0.1s ease;
+}
+
+/* Professional hover states for different sections */
+header:active, section:active {
+    transform: translateX(0px);
+    transition: transform 0.1s ease;
+}
+
+/* Subtle animation for professional elements */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Apply fade-in animation to main sections */
+.container > * {
+    animation: fadeInUp 0.6s ease-out;
+}
+
+.container > *:nth-child(2) { animation-delay: 0.1s; }
+.container > *:nth-child(3) { animation-delay: 0.2s; }
+.container > *:nth-child(4) { animation-delay: 0.3s; }
+
+/* Professional status indicators */
+.info-grid > div::after {
+    content: '';
+    position: absolute;
+    top: var(--spacing-md);
+    right: var(--spacing-md);
+    width: 6px;
+    height: 6px;
+    background-color: var(--success-color);
+    border-radius: 50%;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+.info-grid > div:hover::after {
+    opacity: 1;
+} 

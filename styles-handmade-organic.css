@@ -1,0 +1,913 @@
+/* Handmade/Organic CSS - Crafted with Imperfect Beauty */
+/* This file demonstrates handmade aesthetics with organic box model practices */
+
+/* ===========================
+   Universal Box Model Reset
+   =========================== */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+/* ===========================
+   Handmade CSS Variables
+   =========================== */
+:root {
+    /* Earthy handmade color palette */
+    --background-color: #f9f7f4;
+    --text-color: #3a3632;
+    --header-color: #2d2b28;
+    --accent-color: #d4614b;
+    --secondary-color: #7a9b7f;
+    --tertiary-color: #c8a882;
+    --border-color: #b8b4ad;
+    --hover-color: #f2ede6;
+    --shadow-color: rgba(58, 54, 50, 0.2);
+    
+    /* Handwritten typography */
+    --font-main: 'Brush Script MT', 'Segoe Print', 'Marker Felt', cursive;
+    --font-serif: 'Times New Roman', 'Georgia', serif;
+    --font-handwriting: 'Lucida Handwriting', 'Comic Sans MS', cursive;
+    --font-size-tiny: 0.75rem;
+    --font-size-small: 0.9rem;
+    --font-size-normal: 1.1rem;
+    --font-size-medium: 1.4rem;
+    --font-size-large: 2.2rem;
+    --font-size-huge: 2.8rem;
+    
+    /* Organic spacing */
+    --spacing-xs: 6px;
+    --spacing-sm: 12px;
+    --spacing-md: 18px;
+    --spacing-lg: 32px;
+    --spacing-xl: 45px;
+    
+    /* Irregular borders and radius */
+    --border-width: 2px;
+    --border-radius-sm: 12px;
+    --border-radius-md: 18px;
+    --border-radius-lg: 28px;
+    --border-radius-xl: 45px;
+}
+
+/* ===========================
+   Handmade Base Elements
+   =========================== */
+body {
+    font-family: var(--font-main);
+    margin: 0;
+    padding: var(--spacing-md);
+    background: 
+        radial-gradient(circle at 20% 30%, rgba(196, 168, 130, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(122, 155, 127, 0.1) 0%, transparent 50%),
+        linear-gradient(135deg, var(--background-color), #faf8f5);
+    color: var(--text-color);
+    line-height: 1.8;
+    font-size: var(--font-size-normal);
+    text-align: left;
+    position: relative;
+}
+
+/* Handmade paper texture overlay */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,.04) 2px, rgba(0,0,0,.04) 4px),
+        repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(0,0,0,.04) 2px, rgba(0,0,0,.04) 4px);
+    pointer-events: none;
+    z-index: -1;
+}
+
+/* ===========================
+   Handmade Container (No Grid)
+   =========================== */
+.container {
+    width: 85%;
+    max-width: 850px;
+    margin: 0 auto;
+    padding: var(--spacing-lg);
+    background-color: rgba(255, 255, 255, 0.85);
+    border: var(--border-width) solid var(--border-color);
+    border-radius: var(--border-radius-lg) var(--border-radius-md) var(--border-radius-lg) var(--border-radius-sm);
+    box-shadow: 
+        3px 6px 12px var(--shadow-color),
+        inset 1px 1px 3px rgba(255, 255, 255, 0.8);
+    transform: rotate(-0.3deg);
+    position: relative;
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.container:hover {
+    transform: rotate(0.2deg) translateY(-2px);
+    box-shadow: 
+        5px 10px 20px var(--shadow-color),
+        inset 1px 1px 3px rgba(255, 255, 255, 0.9);
+}
+
+/* Hand-drawn border effect */
+.container::before {
+    content: '';
+    position: absolute;
+    top: -3px;
+    left: -3px;
+    right: -3px;
+    bottom: -3px;
+    border: 1px dashed var(--accent-color);
+    border-radius: var(--border-radius-lg) var(--border-radius-md) var(--border-radius-lg) var(--border-radius-sm);
+    opacity: 0.6;
+    transform: rotate(0.5deg);
+}
+
+/* ===========================
+   Handmade Section Elements (No Grid)
+   =========================== */
+header, section, footer {
+    margin-bottom: var(--spacing-lg);
+    padding: var(--spacing-md) var(--spacing-lg);
+    background-color: rgba(255, 255, 255, 0.9);
+    border: var(--border-width) solid var(--border-color);
+    position: relative;
+    overflow: visible;
+    transition: all 0.3s ease;
+}
+
+header {
+    border-radius: var(--border-radius-md) var(--border-radius-lg) var(--border-radius-sm) var(--border-radius-md);
+    transform: rotate(0.4deg);
+    border-style: solid dashed solid dotted;
+}
+
+section {
+    border-radius: var(--border-radius-sm) var(--border-radius-md) var(--border-radius-lg) var(--border-radius-sm);
+    transform: rotate(-0.2deg);
+    border-style: dotted solid dashed solid;
+}
+
+footer {
+    border-radius: var(--border-radius-lg) var(--border-radius-sm) var(--border-radius-md) var(--border-radius-lg);
+    transform: rotate(0.3deg);
+    border-style: dashed dotted solid dashed;
+}
+
+header:hover, section:hover, footer:hover {
+    border-color: var(--accent-color);
+    background-color: var(--hover-color);
+    transform: rotate(0deg) translateY(-1px);
+    box-shadow: 
+        2px 4px 12px var(--shadow-color),
+        inset 0 1px 3px rgba(255, 255, 255, 0.8);
+}
+
+/* Handmade decorative tape */
+header::after, section::after {
+    content: '';
+    position: absolute;
+    top: -8px;
+    right: 20px;
+    width: 40px;
+    height: 16px;
+    background: linear-gradient(45deg, var(--tertiary-color), #d4c49e);
+    border-radius: 2px;
+    transform: rotate(-15deg);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+}
+
+header:hover::after, section:hover::after {
+    transform: rotate(-10deg) scale(1.1);
+}
+
+/* ===========================
+   Handmade Headers
+   =========================== */
+h1, h2, h3 {
+    font-family: var(--font-handwriting);
+    color: var(--header-color);
+    margin-top: 0;
+    font-weight: normal;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+h1 {
+    font-size: var(--font-size-huge);
+    text-align: center;
+    margin-bottom: var(--spacing-md);
+    padding: var(--spacing-md);
+    color: var(--accent-color);
+    text-transform: none;
+    letter-spacing: 1px;
+    position: relative;
+    transform: rotate(-0.5deg);
+    line-height: 1.2;
+}
+
+h1:hover {
+    transform: rotate(0.3deg) scale(1.02);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.15);
+}
+
+/* Hand-drawn underline */
+h1::before {
+    content: '';
+    position: absolute;
+    bottom: 5px;
+    left: 10%;
+    width: 80%;
+    height: 3px;
+    background: var(--secondary-color);
+    border-radius: 50px;
+    transform: rotate(-0.3deg);
+    transition: all 0.3s ease;
+}
+
+h1:hover::before {
+    transform: rotate(0.2deg) scaleX(1.05);
+    background: var(--accent-color);
+}
+
+/* Handmade doodle */
+h1::after {
+    content: '✏️';
+    position: absolute;
+    right: 5px;
+    top: -10px;
+    transform: rotate(15deg);
+    animation: wiggle 4s ease-in-out infinite;
+}
+
+@keyframes wiggle {
+    0%, 100% { transform: rotate(15deg) translateY(0px); }
+    25% { transform: rotate(20deg) translateY(-2px); }
+    50% { transform: rotate(10deg) translateY(1px); }
+    75% { transform: rotate(18deg) translateY(-1px); }
+}
+
+h2 {
+    font-size: var(--font-size-large);
+    color: var(--accent-color);
+    margin-bottom: var(--spacing-sm);
+    padding: var(--spacing-sm) var(--spacing-md);
+    background-color: rgba(212, 97, 75, 0.08);
+    border-left: 4px solid var(--accent-color);
+    border-right: 2px dotted var(--accent-color);
+    border-radius: var(--border-radius-sm) var(--border-radius-md) var(--border-radius-sm) 0;
+    display: inline-block;
+    position: relative;
+    transform: rotate(-0.2deg);
+    font-family: var(--font-serif);
+    font-style: italic;
+}
+
+h2:hover {
+    background-color: rgba(212, 97, 75, 0.15);
+    transform: rotate(0.1deg) translateX(3px);
+    cursor: pointer;
+}
+
+/* Hand-drawn highlight */
+h2::before {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: -2px;
+    right: -2px;
+    bottom: 2px;
+    background: linear-gradient(45deg, transparent 40%, rgba(200, 168, 130, 0.3) 50%, transparent 60%);
+    border-radius: inherit;
+    z-index: -1;
+    transform: rotate(-0.5deg);
+    transition: all 0.3s ease;
+}
+
+h2:hover::before {
+    transform: rotate(0.2deg);
+    background: linear-gradient(45deg, transparent 35%, rgba(200, 168, 130, 0.5) 50%, transparent 65%);
+}
+
+h3 {
+    font-size: var(--font-size-medium);
+    color: var(--secondary-color);
+    margin-bottom: var(--spacing-sm);
+    padding: var(--spacing-xs) var(--spacing-md);
+    border: 2px solid var(--secondary-color);
+    border-radius: var(--border-radius-lg) var(--border-radius-sm) var(--border-radius-lg) var(--border-radius-sm);
+    display: inline-block;
+    transition: all 0.3s ease;
+    transform: rotate(0.3deg);
+    border-style: solid dashed;
+    font-family: var(--font-main);
+}
+
+h3:hover {
+    background-color: var(--secondary-color);
+    color: white;
+    transform: rotate(-0.2deg) scale(1.03);
+    border-style: dashed solid;
+}
+
+/* ===========================
+   Handmade Content Elements
+   =========================== */
+p, li {
+    font-size: var(--font-size-small);
+    margin-bottom: var(--spacing-sm);
+    transition: all 0.3s ease;
+    font-family: var(--font-serif);
+    line-height: 1.7;
+}
+
+p:hover, li:hover {
+    color: var(--accent-color);
+    transform: translateX(2px);
+    padding-left: var(--spacing-xs);
+}
+
+/* Header subtitle styling */
+.header-subtitle {
+    text-align: center;
+    font-size: var(--font-size-small);
+    margin-top: -5px;
+    color: var(--secondary-color);
+    font-style: italic;
+    transform: rotate(-0.4deg);
+    transition: transform 0.3s ease;
+    font-family: var(--font-serif);
+}
+
+.header-subtitle:hover {
+    transform: rotate(0.2deg) scale(1.02);
+}
+
+/* ===========================
+   Handmade List Styling (No Flexbox)
+   =========================== */
+ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+li {
+    margin-bottom: var(--spacing-md);
+    padding: var(--spacing-sm) var(--spacing-md) var(--spacing-sm) var(--spacing-xl);
+    position: relative;
+    background-color: rgba(122, 155, 127, 0.08);
+    border-radius: var(--border-radius-sm) var(--border-radius-lg) var(--border-radius-sm) var(--border-radius-md);
+    border-left: 3px solid var(--secondary-color);
+    border-right: 1px dotted var(--secondary-color);
+    transition: all 0.3s ease;
+    transform: rotate(-0.1deg);
+}
+
+li:nth-child(odd) {
+    transform: rotate(0.2deg);
+    border-left-color: var(--tertiary-color);
+    border-right-color: var(--tertiary-color);
+    background-color: rgba(200, 168, 130, 0.08);
+}
+
+li:hover {
+    background-color: rgba(122, 155, 127, 0.15);
+    transform: rotate(0deg) translateX(5px);
+    border-left-width: 5px;
+    box-shadow: 2px 3px 8px var(--shadow-color);
+}
+
+li:nth-child(odd):hover {
+    background-color: rgba(200, 168, 130, 0.15);
+}
+
+/* Hand-drawn bullets */
+li::before {
+    content: "◦";
+    position: absolute;
+    left: var(--spacing-sm);
+    top: var(--spacing-sm);
+    color: var(--secondary-color);
+    font-size: var(--font-size-medium);
+    font-weight: bold;
+    transition: all 0.3s ease;
+    transform: rotate(-15deg);
+}
+
+li:nth-child(odd)::before {
+    content: "◈";
+    color: var(--tertiary-color);
+    transform: rotate(15deg);
+}
+
+li:nth-child(3n)::before {
+    content: "✦";
+    color: var(--accent-color);
+    transform: rotate(-30deg);
+}
+
+li:hover::before {
+    transform: rotate(0deg) scale(1.3);
+    color: var(--accent-color);
+}
+
+/* ===========================
+   Handmade Links
+   =========================== */
+a {
+    color: var(--accent-color);
+    text-decoration: underline;
+    text-decoration-style: wavy;
+    text-decoration-color: var(--tertiary-color);
+    font-weight: bold;
+    padding: 1px 3px;
+    border-radius: var(--border-radius-sm);
+    transition: all 0.3s ease;
+    position: relative;
+    font-family: var(--font-handwriting);
+}
+
+a:hover {
+    background-color: rgba(212, 97, 75, 0.1);
+    color: var(--header-color);
+    transform: rotate(-0.5deg) scale(1.02);
+    text-decoration-color: var(--accent-color);
+    text-decoration-style: double;
+}
+
+a:active {
+    transform: rotate(0.3deg) scale(0.98);
+}
+
+/* ===========================
+   Handmade Bio Section
+   =========================== */
+.bio {
+    font-size: var(--font-size-normal);
+    font-style: italic;
+    text-align: left;
+    padding: var(--spacing-lg);
+    margin: var(--spacing-lg) 0;
+    background: 
+        radial-gradient(circle at top left, rgba(200, 168, 130, 0.1), transparent 60%),
+        radial-gradient(circle at bottom right, rgba(122, 155, 127, 0.1), transparent 60%),
+        var(--background-color);
+    border: 2px solid var(--tertiary-color);
+    border-style: dashed dotted solid dashed;
+    border-radius: var(--border-radius-lg) var(--border-radius-sm) var(--border-radius-lg) var(--border-radius-md);
+    position: relative;
+    transition: all 0.3s ease;
+    transform: rotate(-0.2deg);
+    font-family: var(--font-serif);
+}
+
+.bio:hover {
+    background: 
+        radial-gradient(circle at top left, rgba(200, 168, 130, 0.2), transparent 60%),
+        radial-gradient(circle at bottom right, rgba(122, 155, 127, 0.2), transparent 60%),
+        var(--hover-color);
+    transform: rotate(0.1deg) scale(1.01);
+    box-shadow: 3px 5px 15px var(--shadow-color);
+}
+
+/* Hand-drawn quotation marks */
+.bio::before {
+    content: '"';
+    font-size: 3.5rem;
+    color: var(--tertiary-color);
+    position: absolute;
+    top: -5px;
+    left: 5px;
+    font-family: var(--font-serif);
+    transform: rotate(-10deg);
+    opacity: 0.7;
+}
+
+.bio::after {
+    content: '"';
+    font-size: 3.5rem;
+    color: var(--tertiary-color);
+    position: absolute;
+    bottom: -35px;
+    right: 8px;
+    font-family: var(--font-serif);
+    transform: rotate(15deg);
+    opacity: 0.7;
+}
+
+/* ===========================
+   Handmade Carousel (No Flexbox)
+   =========================== */
+.carousel-container {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    border: var(--border-width) solid var(--accent-color);
+    border-style: solid dashed solid dotted;
+    border-radius: var(--border-radius-md) var(--border-radius-lg) var(--border-radius-sm) var(--border-radius-md);
+    margin-bottom: var(--spacing-md);
+    box-shadow: 
+        4px 6px 15px var(--shadow-color),
+        inset 1px 1px 3px rgba(255, 255, 255, 0.8);
+    transition: transform 0.3s ease;
+    transform: rotate(-0.2deg);
+}
+
+.carousel-container:hover {
+    transform: rotate(0.1deg) scale(1.01);
+}
+
+.carousel-slide {
+    width: 100%;
+    transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.carousel-item {
+    width: 100%;
+    display: block;
+}
+
+.carousel-item img,
+.carousel-item video {
+    width: 100%;
+    height: auto;
+    max-height: 400px;
+    object-fit: contain;
+    display: block;
+    background-color: #f7fafc;
+    border-radius: var(--border-radius-sm);
+    transition: all 0.3s ease;
+}
+
+.carousel-item img:hover,
+.carousel-item video:hover {
+    filter: sepia(10%) brightness(1.05) saturate(1.1);
+    transform: scale(1.01);
+}
+
+/* ===========================
+   Handmade Navigation Elements
+   =========================== */
+.carousel-nav {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    transform: translateY(-50%);
+    pointer-events: none;
+}
+
+.carousel-nav button {
+    background: 
+        radial-gradient(circle, var(--accent-color), var(--secondary-color));
+    color: white;
+    border: 2px solid var(--border-color);
+    border-style: dashed;
+    padding: var(--spacing-sm);
+    cursor: pointer;
+    font-size: var(--font-size-medium);
+    font-family: var(--font-handwriting);
+    border-radius: 50%;
+    width: 55px;
+    height: 55px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    pointer-events: auto;
+    box-shadow: 2px 4px 12px var(--shadow-color);
+    transform: rotate(-5deg);
+}
+
+.carousel-nav button:hover {
+    transform: rotate(5deg) scale(1.15);
+    box-shadow: 3px 6px 18px var(--shadow-color);
+    border-style: solid;
+}
+
+.carousel-nav button:active {
+    transform: rotate(0deg) scale(0.95);
+}
+
+.carousel-nav .prev {
+    position: absolute;
+    left: var(--spacing-sm);
+}
+
+.carousel-nav .next {
+    position: absolute;
+    right: var(--spacing-sm);
+}
+
+/* ===========================
+   Handmade Info Layout (No Grid)
+   =========================== */
+.info-grid {
+    width: 100%;
+    margin-bottom: var(--spacing-md);
+}
+
+.info-grid > div {
+    width: 47%;
+    margin: 1.5%;
+    display: inline-block;
+    vertical-align: top;
+    border: var(--border-width) solid var(--border-color);
+    border-style: dotted dashed;
+    padding: var(--spacing-md);
+    background: 
+        linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(249, 247, 244, 0.9));
+    border-radius: var(--border-radius-md) var(--border-radius-sm) var(--border-radius-lg) var(--border-radius-sm);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: visible;
+}
+
+.info-grid > div:nth-child(odd) {
+    transform: rotate(0.3deg);
+}
+
+.info-grid > div:nth-child(even) {
+    transform: rotate(-0.2deg);
+}
+
+.info-grid > div:hover {
+    transform: translateY(-3px) rotate(0deg);
+    border-color: var(--accent-color);
+    border-style: solid;
+    box-shadow: 4px 8px 20px var(--shadow-color);
+}
+
+/* Hand-drawn corner decorations */
+.info-grid > div::before {
+    content: '';
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    width: 12px;
+    height: 12px;
+    background: var(--tertiary-color);
+    border-radius: 50% 20% 50% 20%;
+    transform: rotate(45deg);
+    transition: all 0.3s ease;
+}
+
+.info-grid > div:hover::before {
+    transform: rotate(405deg) scale(1.2);
+    background: var(--accent-color);
+}
+
+/* ===========================
+   Handmade Footer
+   =========================== */
+footer {
+    text-align: center;
+    font-size: var(--font-size-small);
+    padding: var(--spacing-lg);
+    background: 
+        radial-gradient(circle at center, var(--accent-color), var(--secondary-color));
+    color: white;
+    border-radius: var(--border-radius-lg) var(--border-radius-sm) var(--border-radius-lg) var(--border-radius-md);
+    margin-top: var(--spacing-lg);
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    font-family: var(--font-handwriting);
+}
+
+footer:hover {
+    transform: rotate(0deg) scale(1.01);
+    box-shadow: 4px 8px 20px var(--shadow-color);
+}
+
+/* Hand-drawn signature line */
+footer::before {
+    content: '';
+    position: absolute;
+    bottom: 10px;
+    left: 20%;
+    width: 60%;
+    height: 2px;
+    background: rgba(255, 255, 255, 0.6);
+    border-radius: 50px;
+    transform: rotate(-0.5deg);
+}
+
+/* ===========================
+   Handmade Responsive Design
+   =========================== */
+@media (max-width: 768px) {
+    body {
+        padding: var(--spacing-sm);
+        font-size: var(--font-size-small);
+    }
+    
+    .container {
+        width: 95%;
+        padding: var(--spacing-md);
+    }
+    
+    h1 {
+        font-size: var(--font-size-large);
+    }
+    
+    h2 {
+        font-size: var(--font-size-medium);
+    }
+    
+    .carousel-item img {
+        max-height: 300px;
+    }
+    
+    .carousel-nav button {
+        width: 45px;
+        height: 45px;
+        font-size: var(--font-size-normal);
+    }
+    
+    .info-grid > div {
+        width: 96%;
+        margin: 2%;
+        display: block;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: var(--font-size-medium);
+        letter-spacing: 1px;
+    }
+    
+    h2 {
+        font-size: var(--font-size-normal);
+    }
+    
+    .carousel-item img {
+        max-height: 200px;
+    }
+    
+    .carousel-nav button {
+        width: 40px;
+        height: 40px;
+        font-size: var(--font-size-small);
+    }
+    
+    li {
+        padding-left: 35px;
+    }
+}
+
+/* ===========================
+   Handmade Interactive Elements
+   =========================== */
+*:focus {
+    outline: 3px dashed var(--accent-color);
+    outline-offset: 2px;
+    border-radius: var(--border-radius-sm);
+}
+
+/* Selection styling */
+::selection {
+    background-color: var(--tertiary-color);
+    color: var(--header-color);
+}
+
+/* Scroll animation */
+@media (prefers-reduced-motion: no-preference) {
+    * {
+        scroll-behavior: smooth;
+    }
+}
+
+/* ===========================
+   Handmade Hover Effects for Different Elements
+   =========================== */
+p:nth-child(even):hover {
+    background-color: rgba(200, 168, 130, 0.1);
+    padding: var(--spacing-xs);
+    border-radius: var(--border-radius-sm) 0 var(--border-radius-sm) 0;
+    border-left: 2px dotted var(--tertiary-color);
+}
+
+p:nth-child(odd):hover {
+    background-color: rgba(122, 155, 127, 0.1);
+    padding: var(--spacing-xs);
+    border-radius: 0 var(--border-radius-sm) 0 var(--border-radius-sm);
+    border-right: 2px dashed var(--secondary-color);
+}
+
+/* Handmade cursor interactions */
+.container:active {
+    transform: rotate(0deg) scale(0.99);
+}
+
+header:active, section:active {
+    transform: rotate(0deg) translateY(1px);
+}
+
+/* ===========================
+   Special Handmade Text Effects
+   =========================== */
+.handwritten {
+    font-family: var(--font-handwriting);
+    transform: rotate(-0.3deg);
+    font-size: var(--font-size-medium);
+    color: var(--accent-color);
+}
+
+.handwritten:hover {
+    transform: rotate(0.2deg) scale(1.02);
+}
+
+/* Sketchy underlines */
+.sketchy-underline {
+    position: relative;
+}
+
+.sketchy-underline::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--accent-color);
+    border-radius: 50px;
+    transform: rotate(-0.2deg) scaleX(0);
+    transition: transform 0.3s ease;
+}
+
+.sketchy-underline:hover::after {
+    transform: rotate(0.1deg) scaleX(1);
+}
+
+/* Paper fold effect */
+.paper-fold {
+    position: relative;
+}
+
+.paper-fold::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 0;
+    height: 0;
+    border-left: 15px solid var(--background-color);
+    border-top: 15px solid var(--border-color);
+    transition: all 0.3s ease;
+}
+
+.paper-fold:hover::before {
+    border-left-width: 20px;
+    border-top-width: 20px;
+}
+
+/* ===========================
+   Additional Handmade Interactions
+   =========================== */
+
+/* Wobble effect for interactive elements */
+@keyframes wobble {
+    0% { transform: rotate(-0.5deg); }
+    25% { transform: rotate(0.5deg); }
+    50% { transform: rotate(-0.3deg); }
+    75% { transform: rotate(0.3deg); }
+    100% { transform: rotate(-0.5deg); }
+}
+
+.wobble:hover {
+    animation: wobble 0.5s ease-in-out;
+}
+
+/* Handmade scribble animations */
+@keyframes scribble {
+    0%, 100% { transform: translateX(0) rotate(0deg); }
+    25% { transform: translateX(1px) rotate(0.5deg); }
+    50% { transform: translateX(-1px) rotate(-0.5deg); }
+    75% { transform: translateX(1px) rotate(0.3deg); }
+}
+
+.scribble:hover {
+    animation: scribble 0.3s ease-in-out infinite;
+}
+
+/* Torn paper edge effect */
+.torn-edge {
+    position: relative;
+    background: var(--background-color);
+}
+
+.torn-edge::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 100%;
+    height: 8px;
+    background-image: 
+        radial-gradient(circle at 10px 2px, transparent 2px, var(--background-color) 2px),
+        radial-gradient(circle at 20px 6px, transparent 2px, var(--background-color) 2px),
+        radial-gradient(circle at 30px 3px, transparent 2px, var(--background-color) 2px);
+    background-size: 15px 8px;
+    background-repeat: repeat-x;
+} 

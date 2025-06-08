@@ -189,7 +189,8 @@ a:hover {
     box-sizing: border-box;
 }
 
-.carousel-item img {
+.carousel-item img,
+.carousel-item video {
     width: 100%;
     height: auto;
     max-height: 500px;
@@ -216,7 +217,8 @@ a:hover {
     width: 100%;
     display: flex;
     justify-content: space-between;
-    transform: translateY(-50%);
+
+    transform: translateY(50%);
 }
 
 .carousel-nav button {
