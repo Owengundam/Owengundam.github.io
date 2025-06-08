@@ -3,27 +3,27 @@ import React, { useState } from 'react';
 const projectItems = [
   {
     type: 'image',
-    src: '/images/original_253036431b75f71e2c963208cdabad35.jpg',
+    src: '/owengundam.github.io/images/original_253036431b75f71e2c963208cdabad35.jpg',
     alt: 'Project Image 1'
   },
   {
     type: 'image',
-    src: '/images/original_36fac7ca4b9ec3b9e611e8af47a6432b.gif',
+    src: '/owengundam.github.io/images/original_36fac7ca4b9ec3b9e611e8af47a6432b.gif',
     alt: 'Project Image 2'
   },
   {
     type: 'image',
-    src: '/images/original_fa6307f4e5d8decec46751893453a8fc.gif',
+    src: '/owengundam.github.io/images/original_fa6307f4e5d8decec46751893453a8fc.gif',
     alt: 'Project Image 3'
   },
   {
     type: 'image',
-    src: '/images/original_025070e5d893cecc740d90dfec23cf93.gif',
+    src: '/owengundam.github.io/images/original_025070e5d893cecc740d90dfec23cf93.gif',
     alt: 'Project Image 4'
   },
   {
     type: 'video',
-    src: '/videos/Screen Recording.mp4',
+    src: '/owengundam.github.io/videos/Screen Recording.mp4',
     alt: 'Project Video'
   }
 ];
