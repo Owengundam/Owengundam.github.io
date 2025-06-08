@@ -3,7 +3,7 @@ import React from 'react';
 function Bio() {
   return (
     <section id="bio-section">
-      <h2>Personal Statement</h2>
+      <h2>Personal Statements</h2>
       <p className="bio">
         Haiming Wang is an EDGE Architectural Technologies graduate student at SCI-Arc in Los Angeles, 
         blending computational design, AI, and neuroscience to craft visionary, socially responsible architecture. 
