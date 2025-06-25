@@ -15,7 +15,7 @@
    =========================== */
 :root {
     /* Original design variables */
-    --background-color: #c0d8b9;
+    --background-color: #ffffff;
     --text-color: #333333;
     --header-color: #1a1a1a;
     --accent-color: #000000;
@@ -187,83 +187,6 @@ a:hover {
 }
 
 /* ===========================
-   Carousel Styles with Box Model
-   =========================== */
-.carousel-container {
-    position: relative;
-    width: 100%;
-    overflow: hidden;
-    border: 1px solid var(--border-color);
-    margin-bottom: var(--spacing-unit);
-}
-
-.carousel-slide {
-    display: flex;
-    transition: transform 0.5s ease-in-out;
-}
-
-.carousel-item {
-    min-width: 100%;
-    box-sizing: border-box;
-}
-
-.carousel-item img,
-.carousel-item video {
-    width: 100%;
-    height: auto;
-    max-height: 500px;
-    object-fit: contain;
-    display: block;
-    background-color: #f0f0f0;
-}
-
-.carousel-item video {
-    width: 100%;
-    height: auto;
-    max-height: 500px;
-    object-fit: contain;
-    display: block;
-    background-color: #f0f0f0;
-}
-
-/* ===========================
-   Navigation Elements
-   =========================== */
-.carousel-nav {
-    position: absolute;
-    top: 50%;
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-
-    transform: translateY(50%);
-}
-
-.carousel-nav button {
-    background-color: rgba(0, 0, 0, 0.3);
-    color: white;
-    border: none;
-    padding: 10px 15px;
-    cursor: pointer;
-    font-size: var(--font-size-medium);
-    font-family: var(--font-main);
-    opacity: 0.7;
-    transition: opacity 0.3s ease;
-}
-
-.carousel-nav button:hover {
-    opacity: 1;
-}
-
-.carousel-nav .prev {
-    margin-left: 5px;
-}
-
-.carousel-nav .next {
-    margin-right: 5px;
-}
-
-/* ===========================
    Grid Layout with Box Model
    =========================== */
 .info-grid {
@@ -288,69 +211,6 @@ footer {
     border-top: 2px solid var(--accent-color);
 }
 
-/* ===========================
-   Responsive Box Model Adjustments
-   =========================== */
-@media (max-width: 768px) {
-    body {
-        font-size: calc(var(--font-size-normal) * 0.9);
-        padding-top: var(--spacing-unit);
-        padding-bottom: var(--spacing-unit);
-    }
-    
-    .container {
-        width: 95%;
-        gap: var(--spacing-unit);
-    }
-    
-    h1 {
-        font-size: calc(var(--font-size-large) * 0.85);
-    }
-    
-    h2 {
-        font-size: calc(var(--font-size-medium) * 0.9);
-    }
-    
-    .carousel-item img {
-        max-height: 350px;
-    }
-    
-    .carousel-nav button {
-        padding: 8px 12px;
-        font-size: calc(var(--font-size-medium) * 0.9);
-    }
-}
-
-@media (max-width: 480px) {
-    body {
-        font-size: calc(var(--font-size-normal) * 0.8);
-    }
-    
-    h1 {
-        font-size: calc(var(--font-size-large) * 0.7);
-    }
-    
-    h2 {
-        font-size: calc(var(--font-size-medium) * 0.8);
-    }
-    
-    p, li, .bio {
-        font-size: calc(var(--font-size-small) * 0.95);
-    }
-    
-    .carousel-item img {
-        max-height: 250px;
-    }
-    
-    .carousel-nav button {
-        padding: 6px 10px;
-        font-size: calc(var(--font-size-medium) * 0.8);
-    }
-    
-    .info-grid {
-        grid-template-columns: 1fr; /* Stack on small screens */
-    }
-}
 
 /* ===========================
    Project Grid Layout (3x2 Grid)
@@ -482,10 +342,11 @@ footer {
     border: 2px solid var(--border-color);
     background: linear-gradient(135deg, 
         rgba(192, 216, 185, 0.1) 0%, 
-        rgba(192, 216, 185, 0.3) 100%);
+        rgba(255, 255, 255, 0.3) 100%);
     border-radius: var(--border-radius-md);
     user-select: none;
     cursor: crosshair;
+    margin: 0 auto; /* Center the compass grid */
 }
 
 .axis-label {
@@ -643,18 +504,16 @@ footer {
    =========================== */
 .compass-and-timeline {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    gap: calc(var(--spacing-unit) * 2);
-    justify-content: center;
     width: 100%;
     position: relative;
 }
 
 .timeline-container {
     position: absolute;
-    right: 15%;
-    top: 50%;
-    transform: translateY(-50%);
+    left: calc(110%); /* 30px to the right of compass border */
+    top: 0;
     display: flex;
     align-items: center;
     height: 400px;
@@ -662,14 +521,22 @@ footer {
 
 .timeline-pointer {
     position: absolute;
-    left: 10px;
-    font-size: 20px;
-    color: var(--accent-color);
+    left: 20%;
     transform: translateY(-50%);
     z-index: 3;
     transition: top 0.2s ease;
     user-select: none;
-    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.triangle-icon {
+    width: 0;
+    height: 0;
+    border-left: 10px solid var(--accent-color);
+    border-top: 8px solid transparent;
+    border-bottom: 8px solid transparent;
 }
 
 .timeline-track {
@@ -713,62 +580,84 @@ footer {
    =========================== */
 @media (max-width: 768px) {
     .compass-grid {
-        width: 300px;
-        height: 300px;
+        width: 280px;
+        height: 280px;
     }
     
     .axis-left {
-        left: -50px;
+        left: -40px;
     }
     
     .axis-right {
-        right: -60px;
+        right: -50px;
     }
     
     .position-display {
         min-width: 250px;
     }
-    
-    .compass-and-timeline {
-        flex-direction: column;
-        gap: var(--spacing-unit);
-    }
-    
+
     .timeline-container {
-        height: 200px;
-        margin-top: var(--spacing-unit);
+        height: 280px;
+        left: calc(100% + 20px); /* Closer on tablet */
     }
     
     .timeline-pointer {
         left: 5px;
-        font-size: 16px;
+    }
+    
+    .triangle-icon {
+        border-left: 8px solid var(--accent-color);
+        border-top: 6px solid transparent;
+        border-bottom: 6px solid transparent;
     }
     
     .marker-label {
-        left: 50px;
+        left: 40px;
         font-size: 10px;
     }
 }
 
 @media (max-width: 480px) {
     .compass-grid {
-        width: 250px;
-        height: 250px;
+        width: 200px;
+        height: 200px;
     }
     
     .axis-left {
-        left: -45px;
+        left: 3%;
         font-size: calc(var(--font-size-small) * 0.9);
     }
     
     .axis-right {
-        right: -55px;
+        right: 3%;
         font-size: calc(var(--font-size-small) * 0.9);
     }
     
     .position-display {
         min-width: 200px;
         padding: calc(var(--spacing-unit) * 0.75);
+    }
+    
+    .compass-and-timeline {
+        transform: scale(0.7);
+        gap: 0; /* Remove gap when scaling */
+    }
+    
+    .timeline-container {
+        height: 200px;
+        right:2%;
+        /* margin-left: calc(var(--spacing-unit) * 5); */
+    }
+    
+    .triangle-icon {
+        border-left: 6px solid var(--accent-color);
+        border-top: 5px solid transparent;
+        border-bottom: 5px solid transparent;
+    }
+    
+    .marker-label {
+        left: 30px;
+        font-size: 8px;
     }
     
     .quote-display {

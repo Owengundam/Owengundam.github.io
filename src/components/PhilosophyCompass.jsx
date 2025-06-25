@@ -16,9 +16,20 @@ function PhilosophyCompass() {
     updatePosition(e);
   };
 
+  const handleTouchStart = (e) => {
+    setIsDragging(true);
+    updatePosition(e.touches[0]);
+  };
+
   const handleMouseMove = (e) => {
     if (!isDragging) return;
     updatePosition(e);
+  };
+
+  const handleTouchMove = (e) => {
+    if (!isDragging) return;
+    e.preventDefault(); // Prevent scrolling while dragging
+    updatePosition(e.touches[0]);
   };
 
   const handleMouseUp = () => {
@@ -42,9 +53,20 @@ function PhilosophyCompass() {
     updateTimeline(e);
   };
 
+  const handleTimelineTouchStart = (e) => {
+    setIsTimelineDragging(true);
+    updateTimeline(e.touches[0]);
+  };
+
   const handleTimelineMouseMove = (e) => {
     if (!isTimelineDragging) return;
     updateTimeline(e);
+  };
+
+  const handleTimelineTouchMove = (e) => {
+    if (!isTimelineDragging) return;
+    e.preventDefault(); // Prevent scrolling while dragging
+    updateTimeline(e.touches[0]);
   };
 
   const updateTimeline = (e) => {
@@ -112,14 +134,18 @@ function PhilosophyCompass() {
     setLoading(false);
   };
 
-  // Add global mouse event listeners
+  // Add global mouse and touch event listeners
   React.useEffect(() => {
     if (isDragging) {
       document.addEventListener('mousemove', handleMouseMove);
       document.addEventListener('mouseup', handleMouseUp);
+      document.addEventListener('touchmove', handleTouchMove, { passive: false });
+      document.addEventListener('touchend', handleMouseUp);
       return () => {
         document.removeEventListener('mousemove', handleMouseMove);
         document.removeEventListener('mouseup', handleMouseUp);
+        document.removeEventListener('touchmove', handleTouchMove);
+        document.removeEventListener('touchend', handleMouseUp);
       };
     }
   }, [isDragging]);
@@ -128,9 +154,13 @@ function PhilosophyCompass() {
     if (isTimelineDragging) {
       document.addEventListener('mousemove', handleTimelineMouseMove);
       document.addEventListener('mouseup', handleMouseUp);
+      document.addEventListener('touchmove', handleTimelineTouchMove, { passive: false });
+      document.addEventListener('touchend', handleMouseUp);
       return () => {
         document.removeEventListener('mousemove', handleTimelineMouseMove);
         document.removeEventListener('mouseup', handleMouseUp);
+        document.removeEventListener('touchmove', handleTimelineTouchMove);
+        document.removeEventListener('touchend', handleMouseUp);
       };
     }
   }, [isTimelineDragging]);
@@ -175,6 +205,9 @@ function PhilosophyCompass() {
             onMouseMove={handleMouseMove}
             onMouseUp={handleMouseUp}
             onMouseLeave={handleMouseUp}
+            onTouchStart={handleTouchStart}
+            onTouchMove={handleTouchMove}
+            onTouchEnd={handleMouseUp}
           >
           {/* Axis Labels */}
           <div className="axis-label axis-top">Systemic</div>
@@ -199,16 +232,15 @@ function PhilosophyCompass() {
           >
             <div className="point-inner"></div>
           </div>
-          </div>
           
-          {/* Timeline Component */}
+          {/* Timeline Component - Now inside compass grid */}
           <div className="timeline-container">
-            {/* Triangle Pointer */}
+            {/* Triangle Pointer - Replace unicode with CSS triangle */}
             <div 
               className="timeline-pointer"
               style={{ top: `${currentTimelinePosition}%` }}
             >
-              ▶
+              <div className="triangle-icon"></div>
             </div>
             
             {/* Timeline Track */}
@@ -216,6 +248,7 @@ function PhilosophyCompass() {
               className="timeline-track"
               ref={timelineRef}
               onMouseDown={handleTimelineMouseDown}
+              onTouchStart={handleTimelineTouchStart}
             >
               {/* Timeline Markers */}
               {timelineMarkers.map((marker) => (
@@ -229,6 +262,7 @@ function PhilosophyCompass() {
                 </div>
               ))}
             </div>
+          </div>
           </div>
         </div>
         
