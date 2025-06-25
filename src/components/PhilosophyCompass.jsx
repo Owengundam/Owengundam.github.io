@@ -12,11 +12,19 @@ function PhilosophyCompass() {
 
   // Handle mouse/touch events for dragging
   const handleMouseDown = (e) => {
+    // If the click is on the timeline, ignore it and let the timeline handlers take over.
+    if (e.target.closest('.timeline-container')) {
+      return;
+    }
     setIsDragging(true);
     updatePosition(e);
   };
 
   const handleTouchStart = (e) => {
+    // If the touch is on the timeline, ignore it and let the timeline handlers take over.
+    if (e.target.closest('.timeline-container')) {
+      return;
+    }
     setIsDragging(true);
     updatePosition(e.touches[0]);
   };
@@ -134,35 +142,62 @@ function PhilosophyCompass() {
     setLoading(false);
   };
 
-  // Add global mouse and touch event listeners
+  // Add global listeners for dragging events
   React.useEffect(() => {
+    const handleMove = (e) => {
+      if (!isDragging) return;
+      // Use the correct event data for mouse vs. touch
+      const moveEvent = e.touches ? e.touches[0] : e;
+      updatePosition(moveEvent);
+    };
+
+    const handleTouchMove = (e) => {
+      if (!isDragging) return;
+      e.preventDefault();
+      handleMove(e);
+    };
+
     if (isDragging) {
-      document.addEventListener('mousemove', handleMouseMove);
-      document.addEventListener('mouseup', handleMouseUp);
+      document.addEventListener('mousemove', handleMove);
       document.addEventListener('touchmove', handleTouchMove, { passive: false });
+      document.addEventListener('mouseup', handleMouseUp);
       document.addEventListener('touchend', handleMouseUp);
-      return () => {
-        document.removeEventListener('mousemove', handleMouseMove);
-        document.removeEventListener('mouseup', handleMouseUp);
-        document.removeEventListener('touchmove', handleTouchMove);
-        document.removeEventListener('touchend', handleMouseUp);
-      };
     }
+
+    return () => {
+      document.removeEventListener('mousemove', handleMove);
+      document.removeEventListener('touchmove', handleTouchMove);
+      document.removeEventListener('mouseup', handleMouseUp);
+      document.removeEventListener('touchend', handleMouseUp);
+    };
   }, [isDragging]);
 
   React.useEffect(() => {
+    const handleTimelineMove = (e) => {
+      if (!isTimelineDragging) return;
+      const moveEvent = e.touches ? e.touches[0] : e;
+      updateTimeline(moveEvent);
+    };
+
+    const handleTimelineTouchMove = (e) => {
+      if (!isTimelineDragging) return;
+      e.preventDefault();
+      handleTimelineMove(e);
+    };
+
     if (isTimelineDragging) {
-      document.addEventListener('mousemove', handleTimelineMouseMove);
-      document.addEventListener('mouseup', handleMouseUp);
+      document.addEventListener('mousemove', handleTimelineMove);
       document.addEventListener('touchmove', handleTimelineTouchMove, { passive: false });
+      document.addEventListener('mouseup', handleMouseUp);
       document.addEventListener('touchend', handleMouseUp);
-      return () => {
-        document.removeEventListener('mousemove', handleTimelineMouseMove);
-        document.removeEventListener('mouseup', handleMouseUp);
-        document.removeEventListener('touchmove', handleTimelineTouchMove);
-        document.removeEventListener('touchend', handleMouseUp);
-      };
     }
+
+    return () => {
+      document.removeEventListener('mousemove', handleTimelineMove);
+      document.removeEventListener('touchmove', handleTimelineTouchMove);
+      document.removeEventListener('mouseup', handleMouseUp);
+      document.removeEventListener('touchend', handleMouseUp);
+    };
   }, [isTimelineDragging]);
 
   // Generate timeline decade markers
@@ -193,7 +228,7 @@ function PhilosophyCompass() {
     <section id="philosophy-compass">
       <h2>Design Philosophy Compass</h2>
       <p className="compass-description">
-        Standing on the shoulders of giants - drag the point to discover the design thinkers who shaped your perspective.
+        Standing on the shoulders of giants - drag the point to discover the design thinkers who shaped our world.
       </p>
       
       <div className="compass-container">
@@ -202,67 +237,65 @@ function PhilosophyCompass() {
             className="compass-grid"
             ref={compassRef}
             onMouseDown={handleMouseDown}
-            onMouseMove={handleMouseMove}
             onMouseUp={handleMouseUp}
             onMouseLeave={handleMouseUp}
             onTouchStart={handleTouchStart}
-            onTouchMove={handleTouchMove}
             onTouchEnd={handleMouseUp}
           >
-          {/* Axis Labels */}
-          <div className="axis-label axis-top">Systemic</div>
-          <div className="axis-label axis-bottom">Intuitive</div>
-          <div className="axis-label axis-left">Formalist</div>
-          <div className="axis-label axis-right">Contextualist</div>
-          
-          {/* Grid Lines */}
-          <div className="grid-lines">
-            <div className="grid-line horizontal" style={{ top: '50%' }}></div>
-            <div className="grid-line vertical" style={{ left: '50%' }}></div>
-          </div>
-          
-          {/* Draggable Point */}
-          <div 
-            className="compass-point"
-            style={{ 
-              left: `${position.x}%`, 
-              top: `${position.y}%`,
-              cursor: isDragging ? 'grabbing' : 'grab'
-            }}
-          >
-            <div className="point-inner"></div>
-          </div>
-          
-          {/* Timeline Component - Now inside compass grid */}
-          <div className="timeline-container">
-            {/* Triangle Pointer - Replace unicode with CSS triangle */}
-            <div 
-              className="timeline-pointer"
-              style={{ top: `${currentTimelinePosition}%` }}
-            >
-              <div className="triangle-icon"></div>
+            {/* Axis Labels */}
+            <div className="axis-label axis-top">Systemic</div>
+            <div className="axis-label axis-bottom">Intuitive</div>
+            <div className="axis-label axis-left">Formalist</div>
+            <div className="axis-label axis-right">Contextualist</div>
+            
+            {/* Grid Lines */}
+            <div className="grid-lines">
+              <div className="grid-line horizontal" style={{ top: '50%' }}></div>
+              <div className="grid-line vertical" style={{ left: '50%' }}></div>
             </div>
             
-            {/* Timeline Track */}
+            {/* Draggable Point */}
             <div 
-              className="timeline-track"
-              ref={timelineRef}
-              onMouseDown={handleTimelineMouseDown}
-              onTouchStart={handleTimelineTouchStart}
+              className="compass-point"
+              style={{ 
+                left: `${position.x}%`, 
+                top: `${position.y}%`,
+                cursor: isDragging ? 'grabbing' : 'grab'
+              }}
             >
-              {/* Timeline Markers */}
-              {timelineMarkers.map((marker) => (
-                <div 
-                  key={marker.year}
-                  className="timeline-marker"
-                  style={{ top: `${marker.position}%` }}
-                >
-                  <div className="marker-tick"></div>
-                  <div className="marker-label">{marker.year}</div>
-                </div>
-              ))}
+              <div className="point-inner"></div>
             </div>
-          </div>
+
+            {/* Timeline Component - MOVED BACK INSIDE */}
+            <div className="timeline-container">
+              {/* Triangle Pointer */}
+              <div 
+                className="timeline-pointer"
+                style={{ top: `${currentTimelinePosition}%` }}
+              >
+                <div className="triangle-icon"></div>
+              </div>
+              
+              {/* Timeline Track */}
+              <div 
+                className="timeline-track"
+                ref={timelineRef}
+                onMouseDown={handleTimelineMouseDown}
+                onTouchStart={handleTimelineTouchStart}
+              >
+                {/* Timeline Markers */}
+                {timelineMarkers.map((marker) => (
+                  <div 
+                    key={marker.year}
+                    className="timeline-marker"
+                    style={{ top: `${marker.position}%` }}
+                  >
+                    <div className="marker-tick"></div>
+                    <div className="marker-label">{marker.year}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
         
