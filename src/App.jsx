@@ -2,7 +2,7 @@ import React from 'react';
 import Header from './components/Header';
 import Bio from './components/Bio';
 import TestVideo from './components/testvideo';
-import Projects from './components/Projects';
+import BodyOfWork from './components/BodyOfWork';
 import InterestsTools from './components/InterestsTools';
 import Footer from './components/Footer';
 
@@ -12,7 +12,7 @@ function App() {
       <Header />
       <Bio />
       <TestVideo />
-      <Projects />
+      <BodyOfWork />
       <InterestsTools />
       <Footer />
     </div>

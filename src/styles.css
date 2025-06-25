@@ -353,6 +353,105 @@ footer {
 }
 
 /* ===========================
+   Project Grid Layout (3x2 Grid)
+   =========================== */
+.project-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, auto);
+    gap: calc(var(--spacing-unit) * 1.5);
+    margin-top: var(--spacing-unit);
+}
+
+.project-card {
+    background-color: var(--background-color);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-md);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.project-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px var(--color-shadow);
+}
+
+.project-image {
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+    background-color: #f0f0f0;
+}
+
+.project-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.project-card:hover .project-image img {
+    transform: scale(1.05);
+}
+
+.project-content {
+    padding: var(--spacing-unit);
+}
+
+.project-title {
+    font-size: var(--font-size-medium);
+    font-weight: 600;
+    color: var(--header-color);
+    margin: 0 0 calc(var(--spacing-unit) / 2) 0;
+}
+
+.project-description {
+    font-size: var(--font-size-small);
+    color: var(--text-color);
+    line-height: 1.5;
+    margin: 0;
+}
+
+/* ===========================
+   Project Grid Responsive Design
+   =========================== */
+@media (max-width: 768px) {
+    .project-grid {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(3, auto);
+        gap: var(--spacing-unit);
+    }
+    
+    .project-image {
+        height: 150px;
+    }
+    
+    .project-content {
+        padding: calc(var(--spacing-unit) * 0.75);
+    }
+}
+
+@media (max-width: 480px) {
+    .project-grid {
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(6, auto);
+        gap: calc(var(--spacing-unit) * 0.75);
+    }
+    
+    .project-image {
+        height: 180px;
+    }
+    
+    .project-content {
+        padding: calc(var(--spacing-unit) * 0.6);
+    }
+    
+    .project-title {
+        font-size: var(--font-size-normal);
+    }
+}
+
+/* ===========================
    Debug Mode (uncomment to visualize box model)
    =========================== */
 /*
