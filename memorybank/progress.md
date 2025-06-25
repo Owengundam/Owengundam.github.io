@@ -1,5 +1,27 @@
 # Progress Tracking
 
+## NEW: Design Philosophy Compass - Architecture and Responsive Rework
+
+We completed a major refactor of the "Design Philosophy Compass" to solve significant responsive layout and event handling challenges. The component is now robust and works reliably across desktop and mobile.
+
+### Key Technical Achievements & Final Architecture:
+1.  **Stable DOM Structure**: The final, successful architecture nests the `.timeline-container` as a direct **child** of the `.compass-grid`. This was critical for creating a reliable and predictable layout.
+2.  **Relative Positioning**:
+    *   The parent `.compass-grid` uses `position: relative`.
+    *   The child `.timeline-container` uses `position: absolute`.
+    *   This allows the timeline to be positioned precisely relative to the compass border using `left: calc(100% + 20px)`, where the `20px` gap can be easily adjusted.
+3.  **Solved Event Bubbling**:
+    *   **Problem**: Clicks on the timeline were firing the compass's event handlers.
+    *   **Solution**: The parent compass's `handleMouseDown` and `handleTouchStart` functions now check the event's origin with `e.target.closest('.timeline-container')` and ignore any events coming from the timeline. This is more robust than `stopPropagation()`.
+4.  **Fixed Passive Listener Errors**:
+    *   **Problem**: `e.preventDefault()` in the `touchmove` handlers was causing console errors because the listeners were "passive" by default.
+    *   **Solution**: We now use `useEffect` hooks to programmatically add event listeners, explicitly setting `{ passive: false }` for `touchmove` to allow for scroll prevention during drag events.
+5.  **Unified Responsive Strategy**:
+    *   **Removed `transform: scale()`**: This was causing layout bugs and was replaced.
+    *   **The component now shrinks proportionally** by setting new, smaller `width` and `height` values for the parent `.compass-grid` inside media queries for tablet and mobile. The child timeline follows automatically.
+
+---
+
 ## 🎉 PROJECT SUCCESSFULLY DEPLOYED! 🎉
 
 **Live Portfolio URL**: https://willowy-blini-fc737f.netlify.app/

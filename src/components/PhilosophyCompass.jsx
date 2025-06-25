@@ -91,13 +91,13 @@ function PhilosophyCompass() {
   // Convert position to design philosophy coordinates
   const getPhilosophyPosition = () => {
     const formalistToContextualist = position.x; // 0 = Formalist, 100 = Contextualist
-    const systemicToIntuitive = 100 - position.y; // 0 = Systemic, 100 = Intuitive
+    const systematicToIntuitive = 100 - position.y; // 0 = systematic, 100 = Intuitive
     
     return {
       horizontal: formalistToContextualist > 50 ? 'Contextualist' : 'Formalist',
-      vertical: systemicToIntuitive > 50 ? 'Intuitive' : 'Systemic',
+      vertical: systematicToIntuitive > 50 ? 'Intuitive' : 'systematic',
       horizontalStrength: Math.abs(formalistToContextualist - 50) * 2,
-      verticalStrength: Math.abs(systemicToIntuitive - 50) * 2
+      verticalStrength: Math.abs(systematicToIntuitive - 50) * 2
     };
   };
 
@@ -113,7 +113,7 @@ function PhilosophyCompass() {
     
     // Mock response - you'll replace this with actual LLM API call
     const mockQuotes = {
-      'Formalist-Systemic': {
+      'Formalist-systematic': {
         designer: 'Louis Kahn',
         quote: 'Architecture is the thoughtful making of spaces. The continual renewal of architecture comes from changing concepts of space.',
         context: 'Known for systematic formal explorations'
@@ -123,7 +123,7 @@ function PhilosophyCompass() {
         quote: 'Architecture is exposed to life. If it is good, it can improve life.',
         context: 'Emphasizes sensory and emotional experience'
       },
-      'Contextualist-Systemic': {
+      'Contextualist-systematic': {
         designer: 'Christopher Alexander',
         quote: 'A pattern language gives each person who uses it the power to create an infinite variety of new and unique buildings.',
         context: 'Systematic approach to contextual design'
@@ -136,7 +136,7 @@ function PhilosophyCompass() {
     };
     
     const key = `${philosophy.horizontal}-${philosophy.vertical}`;
-    const selectedQuote = mockQuotes[key] || mockQuotes['Formalist-Systemic'];
+    const selectedQuote = mockQuotes[key] || mockQuotes['Formalist-systematic'];
     
     setQuote(selectedQuote);
     setLoading(false);
@@ -243,7 +243,7 @@ function PhilosophyCompass() {
             onTouchEnd={handleMouseUp}
           >
             {/* Axis Labels */}
-            <div className="axis-label axis-top">Systemic</div>
+            <div className="axis-label axis-top">systematic</div>
             <div className="axis-label axis-bottom">Intuitive</div>
             <div className="axis-label axis-left">Formalist</div>
             <div className="axis-label axis-right">Contextualist</div>
