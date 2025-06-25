@@ -169,6 +169,24 @@ a:hover {
 }
 
 /* ===========================
+   Test Video Section
+   =========================== */
+#testvideo {
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+}
+
+#testvideo video {
+    width: 100%;
+    height: auto;
+    max-height: 500px;
+    object-fit: contain;
+    display: block;
+    background-color: #f0f0f0;
+}
+
+/* ===========================
    Carousel Styles with Box Model
    =========================== */
 .carousel-container {
