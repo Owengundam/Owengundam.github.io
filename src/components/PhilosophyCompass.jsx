@@ -116,22 +116,26 @@ function PhilosophyCompass() {
       'Formalist-systematic': {
         designer: 'Louis Kahn',
         quote: 'Architecture is the thoughtful making of spaces. The continual renewal of architecture comes from changing concepts of space.',
-        context: 'Known for systematic formal explorations'
+        context: 'Known for systematic formal explorations',
+        image: '/images/testPhilosophers/Kahn_Portrait_Light.jpg'
       },
       'Formalist-Intuitive': {
         designer: 'Peter Zumthor',
         quote: 'Architecture is exposed to life. If it is good, it can improve life.',
-        context: 'Emphasizes sensory and emotional experience'
+        context: 'Emphasizes sensory and emotional experience',
+        image: '/images/testPhilosophers/peter zumthor.jpg'
       },
       'Contextualist-systematic': {
         designer: 'Christopher Alexander',
         quote: 'A pattern language gives each person who uses it the power to create an infinite variety of new and unique buildings.',
-        context: 'Systematic approach to contextual design'
+        context: 'Systematic approach to contextual design',
+        image: '/images/testPhilosophers/Christopher-Alexander.jpeg'
       },
       'Contextualist-Intuitive': {
         designer: 'Hassan Fathy',
         quote: 'The poor deserve architecture, not poor architecture.',
-        context: 'Context-sensitive, community-focused approach'
+        context: 'Context-sensitive, community-focused approach',
+        image: '/images/testPhilosophers/hassan fathy.jpg'
       }
     };
     
@@ -320,11 +324,16 @@ function PhilosophyCompass() {
       {/* Quote Display */}
       {quote && (
         <div className="quote-display">
-          <blockquote>
-            "{quote.quote}"
-          </blockquote>
-          <cite>— {quote.designer}</cite>
-          <p className="quote-context">{quote.context}</p>
+          <div className="philosopher-photo">
+            <img src={quote.image} alt={`Portrait of ${quote.designer}`} />
+          </div>
+          <div className="quote-content">
+            <blockquote>
+              "{quote.quote}"
+            </blockquote>
+            <cite>— {quote.designer}</cite>
+            <p className="quote-context">{quote.context}</p>
+          </div>
         </div>
       )}
     </section>
