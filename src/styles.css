@@ -58,11 +58,12 @@ body {
    Container Layout
    =========================== */
 .container {
-    width: 90%;
+    width: 100%;
     max-width: 1000px;
     display: grid;
     grid-template-columns: 1fr;
     gap: calc(var(--spacing-unit) * 2);
+    justify-items: center; /* This will center the grid items */
 }
 
 /* ===========================
@@ -72,6 +73,8 @@ header, section, footer {
     padding: var(--spacing-unit);
     border: 1px solid var(--border-color);
     background-color: var(--background-color);
+    width: 90%; /* This makes the section narrower than its container */
+    margin-bottom: var(--spacing-unit); /* Add some space between sections */
 }
 
 /* ===========================
