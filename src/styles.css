@@ -153,6 +153,7 @@ a {
     color: var(--accent-color);
     text-decoration: none;
     font-weight: bold;
+    background-color: var(--background-color);
 }
 
 a:hover {
@@ -174,12 +175,6 @@ a:hover {
 /* ===========================
    Test Video Section
    =========================== */
-#testvideo {
-    width: 100%;
-    max-width: 100%;
-    overflow: hidden;
-}
-
 #testvideo video {
     width: 100%;
     height: auto;

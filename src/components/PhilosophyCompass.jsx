@@ -95,7 +95,7 @@ function PhilosophyCompass() {
     
     return {
       horizontal: formalistToContextualist > 50 ? 'Contextualist' : 'Formalist',
-      vertical: systematicToIntuitive > 50 ? 'Intuitive' : 'systematic',
+      vertical: systematicToIntuitive < 50 ? 'Intuitive' : 'systematic',
       horizontalStrength: Math.abs(formalistToContextualist - 50) * 2,
       verticalStrength: Math.abs(systematicToIntuitive - 50) * 2
     };
@@ -105,45 +105,108 @@ function PhilosophyCompass() {
   const findDesignerQuote = async () => {
     setLoading(true);
     setQuote(null);
-    
+
     const philosophy = getPhilosophyPosition();
-    
-    // Simulate API delay
-    await new Promise(resolve => setTimeout(resolve, 2000));
-    
-    // Mock response - you'll replace this with actual LLM API call
-    const mockQuotes = {
-      'Formalist-systematic': {
-        designer: 'Louis Kahn',
-        quote: 'Architecture is the thoughtful making of spaces. The continual renewal of architecture comes from changing concepts of space.',
-        context: 'Known for systematic formal explorations',
-        image: '/images/testPhilosophers/Kahn_Portrait_Light.jpg'
-      },
-      'Formalist-Intuitive': {
-        designer: 'Peter Zumthor',
-        quote: 'Architecture is exposed to life. If it is good, it can improve life.',
-        context: 'Emphasizes sensory and emotional experience',
-        image: '/images/testPhilosophers/peter zumthor.jpg'
-      },
-      'Contextualist-systematic': {
-        designer: 'Christopher Alexander',
-        quote: 'A pattern language gives each person who uses it the power to create an infinite variety of new and unique buildings.',
-        context: 'Systematic approach to contextual design',
-        image: '/images/testPhilosophers/Christopher-Alexander.jpeg'
-      },
-      'Contextualist-Intuitive': {
-        designer: 'Hassan Fathy',
-        quote: 'The poor deserve architecture, not poor architecture.',
-        context: 'Context-sensitive, community-focused approach',
-        image: '/images/testPhilosophers/hassan fathy.jpg'
+    const decade = Math.floor(timeline / 10) * 10;
+
+    // TODO: Move API Key to a secure environment variable (e.g., .env file)
+    const apiKey = import.meta.env.VITE_DIFY_API_KEY;
+    const apiUrl = 'https://api.dify.ai/v1/chat-messages';
+
+    // Debug logging
+    console.log('API Key:', apiKey ? 'Present' : 'Missing');
+    console.log('Philosophy:', philosophy);
+    console.log('Decade:', decade);
+
+    if (!apiKey) {
+      setQuote({
+        designer: 'Configuration Error',
+        quote: 'API key is missing. Please check your .env.local file.',
+        context: 'Make sure VITE_DIFY_API_KEY is set in your .env.local file and restart the dev server.',
+      });
+      setLoading(false);
+      return;
+    }
+
+    // Calculate the target birth year range for the LLM
+    const birthYearEnd = decade - 30;
+    const birthYearStart = decade - 65;
+
+    const prompt = `
+You are an expert on design philosophy. Your task is to find a prominent designer (e.g., architect, product designer or UI/web designer) who fits a specific profile and was active in a specific era.
+
+**CRITICAL INSTRUCTIONS:**
+1.  **Philosophical Profile:** The person must embody "${philosophy.horizontal}" and "${philosophy.vertical}" thinking.
+2.  **Active Period:** The person must have been between 30 and 65 years old during the ${decade}s. This means their birth year must be strictly between ${birthYearStart} and ${birthYearEnd}.
+3.  **Output Format:** You MUST provide the answer as a single, raw JSON object. Do not include any text, markdown, or explanations before or after the JSON.
+
+The JSON object must have these exact keys:
+- "designer": The full name of the person.
+- "quote": A short, impactful quote from them related to their design philosophy.
+- "context": A brief description. Start the sentence with "Born in [year]," and then provide a one-sentence explanation of how they fit the specified philosophical profile.
+    `;
+
+    console.log('Making API request to:', apiUrl);
+    console.log('Request payload:', {
+      inputs: {},
+      query: prompt,
+      response_mode: 'blocking',
+      user: 'philosophy-compass-user',
+    });
+
+    try {
+      const response = await fetch(apiUrl, {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${apiKey}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          inputs: {},
+          query: prompt,
+          response_mode: 'blocking', // 'blocking' for a single response, 'streaming' for chunks
+          user: 'philosophy-compass-user', // A unique identifier for the end-user
+        }),
+      });
+
+      console.log('Response status:', response.status);
+      console.log('Response headers:', response.headers);
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        console.error('API Error Response:', errorData);
+        throw new Error(`API Error: ${response.status} ${response.statusText} - ${JSON.stringify(errorData)}`);
       }
-    };
-    
-    const key = `${philosophy.horizontal}-${philosophy.vertical}`;
-    const selectedQuote = mockQuotes[key] || mockQuotes['Formalist-systematic'];
-    
-    setQuote(selectedQuote);
-    setLoading(false);
+
+      const result = await response.json();
+      console.log('API Response:', result);
+      const content = result.answer;
+
+      // The LLM should return a JSON string. We need to parse it.
+      try {
+        const parsedContent = JSON.parse(content);
+        setQuote(parsedContent);
+      } catch (e) {
+        console.error("Failed to parse LLM response JSON:", e);
+        console.log("Raw content:", content);
+        // Fallback for when the LLM doesn't return perfect JSON
+        setQuote({
+          designer: "Response Error",
+          quote: "The model returned a response that was not valid JSON. Please check the console.",
+          context: content, // Show the raw response for debugging
+        });
+      }
+
+    } catch (error) {
+      console.error('Error fetching from Dify API:', error);
+      setQuote({
+        designer: 'API Error',
+        quote: 'Could not fetch data from the design philosopher oracle.',
+        context: error.message,
+      });
+    } finally {
+      setLoading(false);
+    }
   };
 
   // Add global listeners for dragging events
@@ -324,9 +387,6 @@ function PhilosophyCompass() {
       {/* Quote Display */}
       {quote && (
         <div className="quote-display">
-          <div className="philosopher-photo">
-            <img src={quote.image} alt={`Portrait of ${quote.designer}`} />
-          </div>
           <div className="quote-content">
             <blockquote>
               "{quote.quote}"
