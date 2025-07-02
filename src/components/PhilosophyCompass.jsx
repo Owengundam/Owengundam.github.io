@@ -122,17 +122,14 @@ function PhilosophyCompass() {
     console.log('Decade:', decade);
 
     const prompt = `
-You are an expert on design philosophy. Your task is to find a prominent designer (e.g., architect, product designer or UI/web designer) who fits a specific profile and was active in a specific era.
+Find a famous designer (architect, product/UI designer) who was active in the ${decade}s and represents "${philosophy.horizontal}" + "${philosophy.vertical}" thinking.
 
-**CRITICAL INSTRUCTIONS:**
-1.  **Philosophical Profile:** The person must embody "${philosophy.horizontal}" and "${philosophy.vertical}" thinking.
-2.  **Active Period:** The person must have been between 30 and 65 years old during the ${decade}s. This means their birth year must be strictly between ${birthYearStart} and ${birthYearEnd}.
-3.  **Output Format:** You MUST provide the answer as a single, raw JSON object. Do not include any text, markdown, or explanations before or after the JSON.
-
-The JSON object must have these exact keys:
-- "designer": The full name of the person.
-- "quote": A short, impactful quote from them related to their design philosophy.
-- "context": A brief description. Start the sentence with "Born in [year]," and then provide a one-sentence explanation of how they fit the specified philosophical profile.
+Return only valid JSON:
+{
+  "designer": "Full Name",
+  "quote": "Short design philosophy quote",
+  "context": "Born in [year], brief explanation of their ${philosophy.horizontal}-${philosophy.vertical} approach."
+}
     `;
 
     console.log('Making API request to:', apiUrl);
