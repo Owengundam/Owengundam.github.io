@@ -36,6 +36,11 @@ exports.handler = async function (event) {
   // Retrieve the OpenAI API key securely from environment variables
   const apiKey = process.env.OPENAI_API_KEY;
 
+  // Debug logging for environment variables
+  console.log('Available env vars:', Object.keys(process.env).filter(key => key.includes('API')));
+  console.log('OPENAI_API_KEY exists:', !!apiKey);
+  console.log('OPENAI_API_KEY length:', apiKey ? apiKey.length : 0);
+
   if (!apiKey) {
     return {
       statusCode: 500,
