@@ -163,7 +163,19 @@ The JSON object must have these exact keys:
       if (!response.ok) {
         const errorData = await response.json();
         console.error('API Error Response:', errorData);
-        throw new Error(`API Error: ${response.status} ${response.statusText} - ${JSON.stringify(errorData)}`);
+        
+        // Handle specific error types
+        if (response.status === 408) {
+          setQuote({
+            designer: 'Request Timeout',
+            quote: 'The AI is taking longer than usual to respond.',
+            context: 'Please try again in a moment. The service may be experiencing high demand.',
+          });
+          setLoading(false);
+          return;
+        }
+        
+        throw new Error(`API Error: ${response.status} ${response.statusText} - ${errorData.message || JSON.stringify(errorData)}`);
       }
 
       const result = await response.json();

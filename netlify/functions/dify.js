@@ -47,6 +47,10 @@ exports.handler = async function (event) {
   const apiUrl = 'https://api.dify.ai/v1/chat-messages';
 
   try {
+    // Create an AbortController for timeout handling
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 8000); // 8 second timeout
+
     const apiResponse = await fetch(apiUrl, {
       method: 'POST',
       headers: {
@@ -54,7 +58,10 @@ exports.handler = async function (event) {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({ inputs, query, response_mode, user }),
+      signal: controller.signal,
     });
+
+    clearTimeout(timeoutId);
 
     const text = await apiResponse.text();
 
@@ -68,10 +75,24 @@ exports.handler = async function (event) {
       body: text,
     };
   } catch (error) {
+    if (error.name === 'AbortError') {
+      console.error('Request timed out after 8 seconds');
+      return {
+        statusCode: 408,
+        body: JSON.stringify({ 
+          error: 'Request timeout', 
+          message: 'The AI service is taking too long to respond. Please try again.' 
+        }),
+      };
+    }
+    
     console.error('Error communicating with Dify API:', error);
     return {
       statusCode: 502,
-      body: JSON.stringify({ error: 'Failed to fetch from Dify API' }),
+      body: JSON.stringify({ 
+        error: 'Failed to fetch from Dify API',
+        message: error.message 
+      }),
     };
   }
 } 
