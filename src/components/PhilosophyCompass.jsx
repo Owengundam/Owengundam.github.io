@@ -113,31 +113,30 @@ function PhilosophyCompass() {
     const birthYearEnd = decade - 30;
     const birthYearStart = decade - 65;
 
-    // We proxy the Dify API through a Netlify Function to keep the API key secure.
-    // The function lives at `/.netlify/functions/dify` and handles authentication server-side.
-    const apiUrl = '/.netlify/functions/dify';
+    // We use OpenAI's web search through a Netlify Function to keep the API key secure.
+    // The function lives at `/.netlify/functions/openai` and handles authentication server-side.
+    const apiUrl = '/.netlify/functions/openai';
 
     // Debug logging
     console.log('Philosophy:', philosophy);
     console.log('Decade:', decade);
 
     const prompt = `
-Find a famous designer (architect, product/UI designer) who was active in the ${decade}s and represents "${philosophy.horizontal}" + "${philosophy.vertical}" thinking.
+You are a design history expert. Find a famous designer (architect, product designer, or UI/web designer) who was active in the ${decade}s and represents "${philosophy.horizontal}" + "${philosophy.vertical}" thinking.
 
-Return only valid JSON:
+CRITICAL: You MUST respond with ONLY a valid JSON object. No explanations, no markdown, no additional text.
+
+Required JSON format:
 {
   "designer": "Full Name",
-  "quote": "Short design philosophy quote",
-  "context": "Born in [year], brief explanation of their ${philosophy.horizontal}-${philosophy.vertical} approach."
+  "quote": "A short, impactful quote from them about design",
+  "context": "Born in [birth year], brief explanation of how they embody ${philosophy.horizontal}-${philosophy.vertical} design thinking."
 }
     `;
 
     console.log('Making API request to:', apiUrl);
     console.log('Request payload:', {
-      inputs: {},
       query: prompt,
-      response_mode: 'blocking',
-      user: 'philosophy-compass-user',
     });
 
     try {
@@ -147,10 +146,7 @@ Return only valid JSON:
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          inputs: {},
           query: prompt,
-          response_mode: 'blocking', // 'blocking' for a single response, 'streaming' for chunks
-          user: 'philosophy-compass-user', // A unique identifier for the end-user
         }),
       });
 
@@ -181,21 +177,37 @@ Return only valid JSON:
 
       // The LLM should return a JSON string. We need to parse it.
       try {
-        const parsedContent = JSON.parse(content);
+        // Try to extract JSON from the content if it's wrapped in text
+        let jsonString = content.trim();
+        
+        // Look for JSON object in the response
+        const jsonMatch = content.match(/\{[\s\S]*\}/);
+        if (jsonMatch) {
+          jsonString = jsonMatch[0];
+        }
+        
+        const parsedContent = JSON.parse(jsonString);
+        
+        // Validate that the required fields exist
+        if (!parsedContent.designer || !parsedContent.quote || !parsedContent.context) {
+          throw new Error('Missing required fields in response');
+        }
+        
         setQuote(parsedContent);
       } catch (e) {
-        console.error("Failed to parse LLM response JSON:", e);
+        console.error("Failed to parse OpenAI response JSON:", e);
         console.log("Raw content:", content);
-        // Fallback for when the LLM doesn't return perfect JSON
+        
+        // Fallback: create a structured response from the raw text
         setQuote({
-          designer: "Response Error",
-          quote: "The model returned a response that was not valid JSON. Please check the console.",
-          context: content, // Show the raw response for debugging
+          designer: "Parse Error",
+          quote: "The AI returned useful information, but not in the expected format.",
+          context: content.substring(0, 200) + "...", // Show first 200 chars
         });
       }
 
     } catch (error) {
-      console.error('Error fetching from Dify API:', error);
+      console.error('Error fetching from OpenAI API:', error);
       setQuote({
         designer: 'API Error',
         quote: 'Could not fetch data from the design philosopher oracle.',
