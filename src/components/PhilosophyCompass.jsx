@@ -109,28 +109,17 @@ function PhilosophyCompass() {
     const philosophy = getPhilosophyPosition();
     const decade = Math.floor(timeline / 10) * 10;
 
-    // TODO: Move API Key to a secure environment variable (e.g., .env file)
-    const apiKey = import.meta.env.VITE_DIFY_API_KEY;
-    const apiUrl = 'https://api.dify.ai/v1/chat-messages';
-
-    // Debug logging
-    console.log('API Key:', apiKey ? 'Present' : 'Missing');
-    console.log('Philosophy:', philosophy);
-    console.log('Decade:', decade);
-
-    if (!apiKey) {
-      setQuote({
-        designer: 'Configuration Error',
-        quote: 'API key is missing. Please check your .env.local file.',
-        context: 'Make sure VITE_DIFY_API_KEY is set in your .env.local file and restart the dev server.',
-      });
-      setLoading(false);
-      return;
-    }
-
     // Calculate the target birth year range for the LLM
     const birthYearEnd = decade - 30;
     const birthYearStart = decade - 65;
+
+    // We proxy the Dify API through a Netlify Function to keep the API key secure.
+    // The function lives at `/.netlify/functions/dify` and handles authentication server-side.
+    const apiUrl = '/.netlify/functions/dify';
+
+    // Debug logging
+    console.log('Philosophy:', philosophy);
+    console.log('Decade:', decade);
 
     const prompt = `
 You are an expert on design philosophy. Your task is to find a prominent designer (e.g., architect, product designer or UI/web designer) who fits a specific profile and was active in a specific era.
@@ -158,7 +147,6 @@ The JSON object must have these exact keys:
       const response = await fetch(apiUrl, {
         method: 'POST',
         headers: {
-          'Authorization': `Bearer ${apiKey}`,
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
