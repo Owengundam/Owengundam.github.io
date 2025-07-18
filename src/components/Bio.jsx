@@ -3,13 +3,8 @@ import React from 'react';
 function Bio() {
   return (
     <section id="bio-section">
-      <h2>Personal Statement</h2>
       <p className="bio">
-        Haiming Wang is an EDGE Architectural Technologies graduate student at SCI-Arc in Los Angeles, 
-        blending computational design, AI, and neuroscience to craft visionary, socially responsible architecture. 
-        With roots in Shanghai and a passion for merging art, science, and humanity, Haiming's work spans 
-        interactive data-scapes, generative agent-based facades, and ethical AI research that reimagines 
-        how buildings learn and respond to people and place.
+      Haiming Wang is a computational designer based in Los Angeles, operating in the realms of artificial intelligence, art, and architecture. His work includes chatMASS, an AI architectural massing ideator and exporter built in a game engine to empower architects to iterate on massing fast and intelligently; 3‑D‑printed pieces generated with AI and refined through down‑support techniques; a voxel‑based agentic architectural system written in JavaScript; and more. But the point isn’t the technology or the technical details—it’s just interesting to step into the uncharted and unearth the next nice thing..
       </p>
     </section>
   );

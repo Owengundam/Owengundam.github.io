@@ -48,34 +48,110 @@ body {
     color: var(--text-color);
     line-height: 1.6;
     font-size: var(--font-size-normal);
+    height: 100vh;
+    width: 100vw;
     display: flex;
     justify-content: center;
-    padding-top: calc(var(--spacing-unit) * 2);
-    padding-bottom: calc(var(--spacing-unit) * 2);
+    align-items: flex-start;
+    padding-top: 35vh;
 }
 
 /* ===========================
    Container Layout
    =========================== */
 .container {
-    width: 100%;
-    max-width: 1000px;
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: calc(var(--spacing-unit) * 2);
-    justify-items: center; /* This will center the grid items */
+    width: 80vw;
+    max-width: 2000px;
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--spacing-unit) * 3);
+    padding: var(--spacing-unit);
+    border: 1px solid black;
+
 }
 
 /* ===========================
-   Section Elements
+   New Header Styles
    =========================== */
-header, section, footer {
+.main-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     padding: var(--spacing-unit);
-    border: 1px solid var(--border-color);
-    background-color: var(--background-color);
-    width: 90%; /* This makes the section narrower than its container */
-    margin-bottom: var(--spacing-unit); /* Add some space between sections */
+    border: none;
+    background: transparent;
+    width: 100%;
+    margin-bottom: 0;
 }
+
+.header-left .site-title {
+    font-size: var(--font-size-large);
+    margin: 0;
+    font-weight: 500;
+    color: var(--header-color);
+    border: none;
+    padding: 0;
+    text-align: left;
+}
+
+.header-right {
+    display: flex;
+    gap: calc(var(--spacing-unit) * 1.5);
+    align-items: center;
+}
+
+.nav-item {
+    position: relative;
+}
+
+.nav-button {
+    background: none;
+    border: 1px solid var(--border-color);
+    padding: calc(var(--spacing-unit) * 0.5) var(--spacing-unit);
+    font-family: var(--font-main);
+    font-size: var(--font-size-normal);
+    color: var(--text-color);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.nav-button:hover {
+    background-color: var(--accent-color);
+    color: var(--background-color);
+}
+
+.popup {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: var(--background-color);
+    border: 1px solid var(--border-color);
+    padding: var(--spacing-unit);
+    margin-top: 10px;
+    z-index: 1000;
+    min-width: 300px;
+    max-width: 400px;
+    box-shadow: 0 4px 8px var(--color-shadow);
+}
+
+.popup p {
+    margin: 0;
+    font-size: var(--font-size-small);
+    line-height: 1.5;
+}
+
+.popup a {
+    color: var(--accent-color);
+    text-decoration: none;
+}
+
+.popup a:hover {
+    text-decoration: underline;
+}
+
+/* ===========================
+   Section Elements (Legacy - removed for new design)
+   =========================== */
 
 /* ===========================
    Headers with Box Model
@@ -87,13 +163,7 @@ h1, h2, h3 {
     font-weight: 500; /* Adjusted for Space Grotesk */
 }
 
-h1 {
-    font-size: var(--font-size-large);
-    text-align: center;
-    margin-bottom: var(--spacing-unit);
-    border-bottom: 2px solid var(--accent-color);
-    padding-bottom: var(--spacing-unit);
-}
+/* h1 styles moved to .site-title */
 
 h2 {
     font-size: var(--font-size-medium);
@@ -167,7 +237,7 @@ a:hover {
     font-size: var(--font-size-small);
     font-style: italic;
     text-align: justify;
-    padding: var(--spacing-unit);
+    padding-inline: var(--spacing-unit);
     border-left: 3px solid var(--accent-color);
     background-color: var(--background-color);
 }
@@ -211,15 +281,8 @@ footer {
 
 
 /* ===========================
-   Project Grid Layout (3x2 Grid)
+   Project Grid Layout (removed - duplicate)
    =========================== */
-.project-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(2, auto);
-    gap: calc(var(--spacing-unit) * 1.5);
-    margin-top: var(--spacing-unit);
-}
 
 .project-card {
     background-color: var(--background-color);
@@ -307,6 +370,98 @@ footer {
     .project-title {
         font-size: var(--font-size-normal);
     }
+}
+
+/* ===========================
+   Project Grid Styles
+   =========================== */
+.project-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: calc(var(--spacing-unit) * 3);
+    width: 100%;
+}
+
+.project-button {
+    border: 1px solid var(--border-color);
+    background: var(--background-color);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.project-button:not(.expanded) {
+    height: 60px;
+}
+
+.project-button.expanded {
+    height: auto;
+}
+
+.project-button:hover {
+    border-color: var(--accent-color);
+}
+
+.project-title {
+    padding-top: calc(var(--spacing-unit) / 2);
+    padding-left: calc(var(--spacing-unit) / 2);
+    padding-right: calc(var(--spacing-unit) / 2);
+    padding-bottom: calc(var(--spacing-unit) / 2);
+    font-weight: 500;
+    font-size: var(--font-size-medium);
+    color: var(--header-color);
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: none;
+    height: 60px;
+    margin: 0;
+}
+
+
+
+.project-preview {
+    padding-left: calc(var(--spacing-unit) / 2);
+    padding-right: calc(var(--spacing-unit) / 2);
+    padding-top: 0;
+    padding-bottom: var(--spacing-unit);
+    background: var(--background-color);
+    animation: expandDown 0.3s ease;
+}
+
+@keyframes expandDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.project-thumbnail {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    margin-bottom: calc(var(--spacing-unit) * 0.5);
+    border: 1px solid var(--border-color);
+}
+
+.project-info h3 {
+    margin: 0 0 calc(var(--spacing-unit) * 0.5) 0;
+    font-size: var(--font-size-normal);
+    color: var(--header-color);
+}
+
+.project-info p {
+    margin: 0;
+    font-size: var(--font-size-small);
+    color: var(--text-color);
+    line-height: 1.4;
 }
 
 /* ===========================
@@ -613,6 +768,47 @@ footer {
 /* Remove all old media queries as the design is now fluid */
 
 /* ===========================
+   Responsive Design
+   =========================== */
+@media (max-width: 768px) {
+    .main-header {
+        flex-direction: column;
+        gap: var(--spacing-unit);
+        align-items: flex-start;
+    }
+    
+    .header-right {
+        align-self: stretch;
+        justify-content: space-between;
+    }
+    
+    .popup {
+        right: auto;
+        left: 0;
+        min-width: 280px;
+    }
+    
+    .project-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .project-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .popup {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        min-width: 90vw;
+        max-width: 90vw;
+    }
+}
+
+/* ===========================
    Debug Mode (uncomment to visualize box model)
    =========================== */
 /*
@@ -624,3 +820,12 @@ footer {
     outline: 2px solid blue !important;
 }
 */ 
+.p1-highlight {
+    outline: 7px solid #86d2e1;
+    outline-offset: 0px;
+    background-color: #86d2e1;
+}
+
+.p1-highlight .project-preview {
+    background-color: #86d2e1;
+} 
