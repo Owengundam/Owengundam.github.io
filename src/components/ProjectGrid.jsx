@@ -56,6 +56,10 @@ function ProjectGrid() {
     }, 300); // 300ms delay
   };
 
+  const handleDropdownClick = (url) => {
+    window.open(url, '_blank');
+  };
+
   return (
     <div className="project-grid">
       {projects.map((project) => (
@@ -70,7 +74,8 @@ function ProjectGrid() {
             {project.title}
           </div>
           
-          {hoveredProject === project.id && (
+          {/* Regular project preview for non-Web LLMs projects */}
+          {hoveredProject === project.id && project.id !== 'p4' && (
             <div className="project-preview">
               <img 
                 src={project.thumbnail} 
@@ -80,6 +85,30 @@ function ProjectGrid() {
               <div className="project-info">
                 <p>{project.description}</p>
               </div>
+            </div>
+          )}
+          
+          {/* Special dropdown for Web LLMs project */}
+          {hoveredProject === project.id && project.id === 'p4' && (
+            <div className="webllm-dropdown">
+              <button 
+                className="dropdown-button"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleDropdownClick('https://orbchat.netlify.app/');
+                }}
+              >
+                OrbChat
+              </button>
+              <button 
+                className="dropdown-button"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleDropdownClick('https://designercompass.netlify.app');
+                }}
+              >
+                Designer Compass
+              </button>
             </div>
           )}
         </div>
