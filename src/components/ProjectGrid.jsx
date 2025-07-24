@@ -57,7 +57,7 @@ function ProjectGrid() {
   };
 
   const handleDropdownClick = (url) => {
-    window.open(url, '_blank');
+    window.location.href = url;
   };
 
   return (
