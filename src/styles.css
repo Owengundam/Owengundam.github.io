@@ -1,5 +1,5 @@
-/* Box Model Styling CSS - Integrated from index.html */
-/* This file demonstrates comprehensive box model practices with original design */
+/* Box Model Styling CSS - Cleaned for App Component */
+/* This file contains only styles used by the main App and its components */
 
 /* ===========================
    Universal Box Model Reset
@@ -7,14 +7,13 @@
 *,
 *::before,
 *::after {
-    box-sizing: border-box; /* Include padding and border in element's total width/height */
+    box-sizing: border-box;
 }
 
 /* ===========================
-   CSS Variables (Merged from original design)
+   CSS Variables
    =========================== */
 :root {
-    /* Original design variables */
     --background-color: #ffffff;
     --text-color: #333333;
     --header-color: #1a1a1a;
@@ -26,8 +25,6 @@
     --font-size-medium: 1.2rem;
     --font-size-large: 1.8rem;
     --spacing-unit: 20px;
-    
-    /* Additional box model variables */
     --border-width-thin: 1px;
     --border-width-medium: 2px;
     --border-width-thick: 4px;
@@ -67,11 +64,10 @@ body {
     gap: calc(var(--spacing-unit) * 3);
     padding: var(--spacing-unit);
     border: 1px solid black;
-
 }
 
 /* ===========================
-   New Header Styles
+   Header Styles
    =========================== */
 .main-header {
     display: flex;
@@ -150,229 +146,6 @@ body {
 }
 
 /* ===========================
-   Section Elements (Legacy - removed for new design)
-   =========================== */
-
-/* ===========================
-   Headers with Box Model
-   =========================== */
-h1, h2, h3 {
-    font-family: var(--font-main);
-    color: var(--header-color);
-    margin-top: 0;
-    font-weight: 500; /* Adjusted for Space Grotesk */
-}
-
-/* h1 styles moved to .site-title */
-
-h2 {
-    font-size: var(--font-size-medium);
-    color: var(--accent-color);
-    margin-bottom: calc(var(--spacing-unit) / 2);
-    border-bottom: 1px solid var(--e0e0e0);
-    padding-bottom: calc(var(--spacing-unit) / 4);
-}
-
-h3 {
-    font-size: var(--font-size-normal);
-    font-weight: bold;
-    margin-bottom: calc(var(--spacing-unit) / 4);
-}
-
-/* ===========================
-   Content Elements
-   =========================== */
-p, li {
-    font-size: var(--font-size-small);
-    margin-bottom: calc(var(--spacing-unit) / 2);
-}
-
-/* Header subtitle styling */
-.header-subtitle {
-    text-align: center;
-    font-size: var(--font-size-small);
-    margin-top: -15px;
-    color: #777;
-}
-
-/* ===========================
-   List Styling with Box Model
-   =========================== */
-ul {
-    list-style: none;
-    padding-left: 0;
-}
-
-li {
-    margin-bottom: calc(var(--spacing-unit) / 4);
-    padding-left: var(--spacing-unit);
-    position: relative;
-}
-
-li::before {
-    content: "▹";
-    position: absolute;
-    left: 0;
-    color: var(--accent-color);
-}
-
-/* ===========================
-   Links
-   =========================== */
-a {
-    color: var(--accent-color);
-    text-decoration: none;
-    font-weight: bold;
-    background-color: var(--background-color);
-}
-
-a:hover {
-    text-decoration: underline;
-}
-
-/* ===========================
-   Bio Section with Box Model
-   =========================== */
-.bio {
-    font-size: var(--font-size-small);
-    font-style: italic;
-    text-align: justify;
-    padding-inline: var(--spacing-unit);
-    border-left: 3px solid var(--accent-color);
-    background-color: var(--background-color);
-}
-
-/* ===========================
-   Test Video Section
-   =========================== */
-#testvideo video {
-    width: 100%;
-    height: auto;
-    max-height: 500px;
-    object-fit: contain;
-    display: block;
-    background-color: #f0f0f0;
-}
-
-/* ===========================
-   Grid Layout with Box Model
-   =========================== */
-.info-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: var(--spacing-unit);
-}
-
-.info-grid > div {
-    border: 1px solid var(--border-color);
-    padding: var(--spacing-unit);
-    background-color: var(--background-color);
-}
-
-/* ===========================
-   Footer Styling
-   =========================== */
-footer {
-    text-align: center;
-    font-size: var(--font-size-small);
-    padding: var(--spacing-unit);
-    border-top: 2px solid var(--accent-color);
-}
-
-
-/* ===========================
-   Project Grid Layout (removed - duplicate)
-   =========================== */
-
-.project-card {
-    background-color: var(--background-color);
-    border: 1px solid var(--border-color);
-    border-radius: var(--border-radius-md);
-    overflow: hidden;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.project-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 25px var(--color-shadow);
-}
-
-.project-image {
-    width: 100%;
-    height: 200px;
-    overflow: hidden;
-    background-color: #f0f0f0;
-}
-
-.project-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.3s ease;
-}
-
-.project-card:hover .project-image img {
-    transform: scale(1.05);
-}
-
-.project-content {
-    padding: var(--spacing-unit);
-}
-
-.project-title {
-    font-size: var(--font-size-medium);
-    font-weight: 600;
-    color: var(--header-color);
-    margin: 0 0 calc(var(--spacing-unit) / 2) 0;
-}
-
-.project-description {
-    font-size: var(--font-size-small);
-    color: var(--text-color);
-    line-height: 1.5;
-    margin: 0;
-}
-
-/* ===========================
-   Project Grid Responsive Design
-   =========================== */
-@media (max-width: 768px) {
-    .project-grid {
-        grid-template-columns: repeat(2, 1fr);
-        grid-template-rows: repeat(3, auto);
-        gap: var(--spacing-unit);
-    }
-    
-    .project-image {
-        height: 150px;
-    }
-    
-    .project-content {
-        padding: calc(var(--spacing-unit) * 0.75);
-    }
-}
-
-@media (max-width: 480px) {
-    .project-grid {
-        grid-template-columns: 1fr;
-        grid-template-rows: repeat(6, auto);
-        gap: calc(var(--spacing-unit) * 0.75);
-    }
-    
-    .project-image {
-        height: 180px;
-    }
-    
-    .project-content {
-        padding: calc(var(--spacing-unit) * 0.6);
-    }
-    
-    .project-title {
-        font-size: var(--font-size-normal);
-    }
-}
-
-/* ===========================
    Project Grid Styles
    =========================== */
 .project-grid {
@@ -421,8 +194,6 @@ footer {
     margin: 0;
 }
 
-
-
 .project-preview {
     padding-left: calc(var(--spacing-unit) / 2);
     padding-right: calc(var(--spacing-unit) / 2);
@@ -457,11 +228,18 @@ footer {
     color: var(--header-color);
 }
 
+.project-info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .project-info p {
     margin: 0;
     font-size: var(--font-size-small);
     color: var(--text-color);
     line-height: 1.4;
+    text-align: center;
 }
 
 /* ===========================
@@ -496,307 +274,216 @@ footer {
 }
 
 /* ===========================
-   Philosophy Compass Interactive Component
+   AI Figurative Popup Styles
    =========================== */
-#philosophy-compass {
-    margin-top: calc(var(--spacing-unit) * 2);
-}
-
-.compass-description {
-    text-align: center;
-    font-style: italic;
-    color: var(--text-color);
-    margin-bottom: calc(var(--spacing-unit) * 1.5);
-}
-
-.compass-container {
+.popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.8);
     display: flex;
-    flex-direction: column;
+    justify-content: center;
     align-items: center;
-    gap: var(--spacing-unit);
-    width: 100%;
-    margin: 0 auto;
-    padding: 0 10px;
-    overflow-x: hidden;
-}
-
-.compass-grid {
-    position: relative;
-    width: 45vw;
-    height: 45vw;
-    max-width: 400px;
-    max-height: 400px;
-    min-width: 220px;
-    min-height: 220px;
-    border: 2px solid var(--border-color);
-    background: linear-gradient(135deg, 
-        rgba(192, 216, 185, 0.1) 0%, 
-        rgba(255, 255, 255, 0.3) 100%);
-    border-radius: var(--border-radius-md);
-    user-select: none;
-    cursor: crosshair;
-}
-
-.axis-label {
-    position: absolute;
-    font-weight: 600;
-    color: var(--header-color);
-    pointer-events: none;
-    font-size: clamp(0.5rem, 1.5vw, 0.8rem);
-}
-
-.axis-top {
-    top: 0px;
-    left: 50%;
-    transform: translateX(-50%);
-}
-
-.axis-bottom {
-    bottom: 0px;
-    left: 50%;
-    transform: translateX(-50%);
-}
-
-.axis-left {
-    left: 2%;
-    top: 53%;
-    transform: translateY(-50%);
-}
-
-.axis-right {
-    right: 2%;
-    top: 53%;
-    transform: translateY(-50%);
-}
-
-.grid-lines {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-}
-
-.grid-line {
-    position: absolute;
-    background-color: var(--border-color);
-    opacity: 0.3;
-}
-
-.grid-line.horizontal {
-    width: 100%;
-    height: 1px;
-    transform: translateY(-50%);
-}
-
-.grid-line.vertical {
-    height: 100%;
-    width: 1px;
-    transform: translateX(-50%);
-}
-
-.compass-point {
-    position: absolute;
-    width: 20px;
-    height: 20px;
-    transform: translate(-50%, -50%);
-    z-index: 10;
-    transition: transform 0.1s ease;
-}
-
-.compass-point:hover {
-    transform: translate(-50%, -50%) scale(1.2);
-}
-
-.point-inner {
-    width: 100%;
-    height: 100%;
-    background: radial-gradient(circle, var(--accent-color) 60%, transparent 60%);
-    border: 3px solid var(--background-color);
-    border-radius: 50%;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-}
-
-.position-display {
-    text-align: center;
+    z-index: 2000;
     padding: var(--spacing-unit);
-    background-color: var(--background-color);
+}
+
+.aifigurative-popup {
+    background: var(--background-color);
     border: 1px solid var(--border-color);
-    border-radius: var(--border-radius-md);
-    min-width: 300px;
+    max-width: 90vw;
+    max-height: 90vh;
+    width: 1200px;
+    overflow-y: auto;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
 }
 
-.position-display p {
-    margin-bottom: var(--spacing-unit);
-    font-size: var(--font-size-small);
+.popup-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-unit);
+    border-bottom: 1px solid var(--border-color);
+    background: var(--background-color);
+    position: sticky;
+    top: 0;
+    z-index: 10;
 }
 
-.find-quote-btn {
+.popup-header h2 {
+    margin: 0;
+    font-size: var(--font-size-large);
+    color: var(--header-color);
+    font-weight: 500;
+}
+
+.close-button {
+    background: none;
+    border: 1px solid var(--border-color);
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    cursor: pointer;
+    color: var(--text-color);
+    transition: all 0.2s ease;
+}
+
+.close-button:hover {
     background-color: var(--accent-color);
     color: var(--background-color);
-    border: none;
-    padding: calc(var(--spacing-unit) * 0.75) calc(var(--spacing-unit) * 1.5);
-    border-radius: var(--border-radius-sm);
-    font-family: var(--font-main);
-    font-size: var(--font-size-small);
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
 }
 
-.find-quote-btn:hover:not(:disabled) {
-    background-color: var(--header-color);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-}
-
-.find-quote-btn:disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
-}
-
-.quote-display {
-    margin-top: calc(var(--spacing-unit) * 2);
-    padding: calc(var(--spacing-unit) * 1.5);
-    background-color: var(--background-color);
-    border-left: 4px solid var(--accent-color);
-    border-radius: var(--border-radius-md);
-    max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
+.popup-content {
+    padding: calc(var(--spacing-unit) * 2);
     display: flex;
-    align-items: center;
-    gap: calc(var(--spacing-unit) * 1.5);
+    flex-direction: column;
+    gap: calc(var(--spacing-unit) * 2);
 }
 
-.philosopher-photo {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    overflow: hidden;
-    border: 3px solid var(--border-color);
-    flex-shrink: 0;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+.intro-text {
+    text-align: center;
+    padding: 0 calc(var(--spacing-unit) * 2);
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: calc(var(--spacing-unit) * 2);
 }
 
-.philosopher-photo img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.quote-content {
-    flex-grow: 1;
-}
-
-.quote-display blockquote {
-    font-size: var(--font-size-medium);
-    font-style: italic;
-    line-height: 1.6;
-    margin: 0 0 var(--spacing-unit) 0;
-    color: var(--header-color);
-}
-
-.quote-display cite {
+.intro-text p {
+    margin: 0;
     font-size: var(--font-size-normal);
-    font-weight: 600;
-    color: var(--accent-color);
-    font-style: normal;
+    line-height: 1.6;
+    color: var(--text-color);
 }
 
-.quote-context {
+.carousel-container {
+    display: flex;
+    justify-content: center;
+    padding: 0 calc(var(--spacing-unit) * 1);
+}
+
+.carousel-content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--spacing-unit) * 1);
+}
+
+.media-display {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 500px;
+    background: #ffffff;
+    padding: var(--spacing-unit);
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    user-select: none;
+}
+
+.carousel-media {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    border: 1px solid var(--border-color);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.carousel-media.loaded {
+    opacity: 1;
+}
+
+.media-placeholder {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50px;
+    height: 50px;
+    border: 2px solid var(--border-color);
+    border-top: 2px solid var(--accent-color);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    opacity: 1;
+    transition: opacity 0.3s ease;
+}
+
+.media-placeholder.hidden {
+    opacity: 0;
+}
+
+@keyframes spin {
+    0% { transform: translate(-50%, -50%) rotate(0deg); }
+    100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+
+
+.carousel-indicators {
+    display: flex;
+    justify-content: center;
+    gap: calc(var(--spacing-unit) / 2);
+    padding: calc(var(--spacing-unit) / 2) 0;
+}
+
+.indicator {
+    background: var(--background-color);
+    border: 1px solid var(--border-color);
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--font-size-small);
+    cursor: pointer;
+    color: var(--text-color);
+    transition: all 0.2s ease;
+    font-weight: 500;
+}
+
+.indicator:hover {
+    background-color: #f0f0f0;
+}
+
+.indicator.active {
+    background-color: var(--accent-color);
+    color: var(--background-color);
+}
+
+.collaborators-section {
+    padding: var(--spacing-unit);
+    border-top: 1px solid var(--border-color);
+    text-align: center;
+    background: #ffffff;
+}
+
+.collaborators-section p {
+    margin: 0;
     font-size: var(--font-size-small);
     color: var(--text-color);
-    margin-top: calc(var(--spacing-unit) * 0.5);
-    opacity: 0.8;
+    line-height: 1.4;
 }
 
 /* ===========================
-   Timeline Component for Philosophy Compass
+   Special Highlight Styles
    =========================== */
-.compass-and-timeline {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
+.p1-highlight {
+    outline: 7px solid #86d2e1;
+    outline-offset: 0px;
+    background-color: #86d2e1;
 }
 
-.timeline-spacer {
-    width: 4vw;
-    max-width: 30px;
-    min-width: 10px;
-    flex-shrink: 0;
+.p1-highlight .project-preview {
+    background-color: #86d2e1;
 }
-
-.timeline-container {
-    position: absolute;
-    left: calc(102%);
-    scale: 0.8;
-    height: 45vw;
-    max-height: 400px;
-    min-height: 220px;
-}
-
-.timeline-pointer {
-    position: absolute;
-    left: 20%;
-    transform: translateY(-50%);
-    z-index: 3;
-    transition: top 0.2s ease;
-    user-select: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.triangle-icon {
-    width: 0;
-    height: 0;
-    border-left: 10px solid var(--accent-color);
-    border-top: 8px solid transparent;
-    border-bottom: 8px solid transparent;
-}
-
-.timeline-track {
-    position: relative;
-    width: clamp(30px, 6vw, 60px);
-    height: 100%;
-    background: linear-gradient(to bottom, var(--border-color) 0%, var(--border-color) 100%);
-    background-size: 2px 100%;
-    background-repeat: no-repeat;
-    background-position: center;
-    cursor: pointer;
-}
-
-.timeline-marker {
-    position: absolute;
-    left: 0;
-    width: 100%;
-    transform: translateY(-50%);
-    display: flex;
-    align-items: center;
-}
-
-.marker-tick {
-    width: 10px;
-    height: 2px;
-    background-color: var(--text-color);
-    margin-left: calc(50% - 1px);
-}
-
-.marker-label {
-    position: absolute;
-    left: clamp(35px, 7vw, 70px);
-    font-size: clamp(0.5rem, 1.5vw, 0.75rem);
-    color: var(--text-color);
-    white-space: nowrap;
-    user-select: none;
-}
-
-/* ===========================
-   Philosophy Compass Responsive Design
-   =========================== */
-
-/* Remove all old media queries as the design is now fluid */
 
 /* ===========================
    Responsive Design
@@ -822,6 +509,18 @@ footer {
     .project-grid {
         grid-template-columns: repeat(2, 1fr);
     }
+
+    .aifigurative-popup {
+        width: 95vw;
+        max-width: none;
+    }
+
+
+
+    .media-display {
+        height: 300px;
+        padding: calc(var(--spacing-unit) / 2);
+    }
 }
 
 @media (max-width: 480px) {
@@ -837,26 +536,13 @@ footer {
         min-width: 90vw;
         max-width: 90vw;
     }
-}
 
-/* ===========================
-   Debug Mode (uncomment to visualize box model)
-   =========================== */
-/*
-* {
-    outline: 1px solid red !important;
-}
+    .popup-overlay {
+        padding: calc(var(--spacing-unit) / 2);
+    }
 
-*:hover {
-    outline: 2px solid blue !important;
-}
-*/ 
-.p1-highlight {
-    outline: 7px solid #86d2e1;
-    outline-offset: 0px;
-    background-color: #86d2e1;
-}
-
-.p1-highlight .project-preview {
-    background-color: #86d2e1;
+    .popup-content {
+        padding: var(--spacing-unit);
+        gap: calc(var(--spacing-unit) * 2);
+    }
 } 

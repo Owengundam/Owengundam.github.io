@@ -24,6 +24,7 @@
   "homepage": "https://github.com/Owengundam/owengundam.github.io#readme",
   "dependencies": {
     "@vitejs/plugin-react": "^4.5.1",
+    "gsap": "^3.13.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "vite": "^6.3.5"

@@ -1,7 +1,9 @@
 import React, { useState, useRef } from 'react';
+import AIFigurativePopup from './AIFigurativePopup';
 
 function ProjectGrid() {
   const [hoveredProject, setHoveredProject] = useState(null);
+  const [showAIFigurativePopup, setShowAIFigurativePopup] = useState(false);
   const hoverTimeoutRef = useRef(null);
 
   const projects = [
@@ -36,9 +38,19 @@ function ProjectGrid() {
   ];
 
   const handleProjectClick = (projectId) => {
-    // Navigate to project page - placeholder for now
-    console.log(`Navigate to project: ${projectId}`);
-    // In the future: window.location.href = `/projects/${projectId}`;
+    if (projectId === 'p2') {
+      setShowAIFigurativePopup(true);
+    } else if (projectId === 'p1') {
+      window.open('https://chat-mass.com', '_blank');
+    } else {
+      // Navigate to project page - placeholder for now
+      console.log(`Navigate to project: ${projectId}`);
+      // In the future: window.location.href = `/projects/${projectId}`;
+    }
+  };
+
+  const handleClosePopup = () => {
+    setShowAIFigurativePopup(false);
   };
 
   const handleMouseEnter = (projectId) => {
@@ -61,59 +73,61 @@ function ProjectGrid() {
   };
 
   return (
-    <div className="project-grid">
-      {projects.map((project) => (
-        <div
-          key={project.id}
-          className={`project-button${project.id === 'p1' ? ' p1-highlight' : ''} ${hoveredProject === project.id ? 'expanded' : ''}`}
-          onMouseEnter={() => handleMouseEnter(project.id)}
-          onMouseLeave={handleMouseLeave}
-          onClick={() => handleProjectClick(project.id)}
-        >
-          <div className="project-title">
-            {project.title}
-          </div>
-          
-          {/* Regular project preview for non-Web LLMs projects */}
-          {hoveredProject === project.id && project.id !== 'p4' && (
-            <div className="project-preview">
-              <img 
-                src={project.thumbnail} 
-                alt={project.name}
-                className="project-thumbnail"
-              />
-              <div className="project-info">
-                <p>{project.description}</p>
+    <>
+      <div className="project-grid">
+        {projects.map((project) => (
+          <div
+            key={project.id}
+            className={`project-button${project.id === 'p1' ? ' p1-highlight' : ''} ${hoveredProject === project.id ? 'expanded' : ''}`}
+            onMouseEnter={() => handleMouseEnter(project.id)}
+            onMouseLeave={handleMouseLeave}
+            onClick={() => handleProjectClick(project.id)}
+          >
+            <div className="project-title">
+              {project.title}
+            </div>
+            
+            {/* Regular project preview for non-Web LLMs projects */}
+            {hoveredProject === project.id && project.id !== 'p4' && (
+              <div className="project-preview">
+                <div className="project-info">
+                  <p>{project.description}</p>
+                </div>
               </div>
-            </div>
-          )}
-          
-          {/* Special dropdown for Web LLMs project */}
-          {hoveredProject === project.id && project.id === 'p4' && (
-            <div className="webllm-dropdown">
-              <button 
-                className="dropdown-button"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  handleDropdownClick('https://orbchat.netlify.app/');
-                }}
-              >
-                OrbChat
-              </button>
-              <button 
-                className="dropdown-button"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  handleDropdownClick('https://designercompass.netlify.app');
-                }}
-              >
-                Designer Compass
-              </button>
-            </div>
-          )}
-        </div>
-      ))}
-    </div>
+            )}
+            
+            {/* Special dropdown for Web LLMs project */}
+            {hoveredProject === project.id && project.id === 'p4' && (
+              <div className="webllm-dropdown">
+                <button 
+                  className="dropdown-button"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleDropdownClick('https://orbchat.netlify.app/');
+                  }}
+                >
+                  OrbChat
+                </button>
+                <button 
+                  className="dropdown-button"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleDropdownClick('https://designercompass.netlify.app');
+                  }}
+                >
+                  Designer Compass
+                </button>
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+      
+      {/* AI Figurative Popup */}
+      {showAIFigurativePopup && (
+        <AIFigurativePopup onClose={handleClosePopup} />
+      )}
+    </>
   );
 }
 
